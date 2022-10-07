@@ -16,8 +16,10 @@ app.listen(port, () => {
   console.log("running server")
 })
 
+const connectStr = process.env.DATABASE_URL;
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+
+    connectionString: connectStr,
     ssl: true,
   });
 
