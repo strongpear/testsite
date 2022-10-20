@@ -12,7 +12,7 @@ export default function SignInPage() {
     const [password, setPassword] = useState("");
 
     const login = () => {
-        Axios.post('http://localhost:3001/login', {
+        Axios.post('/login', {
         username: username,
         password: password,
         }).then((response) => {
@@ -22,8 +22,8 @@ export default function SignInPage() {
             document.getElementById("loginStatus").innerHTML = "Invalid Credentials";
         } else { // successful authentication
             document.getElementById("loginStatus").innerHTML = "";
-            window.location.replace("http://localhost:3000/home");
-            console.log(" localhost:3000/home " + window.location.href);
+            window.location.assign("/home");
+            console.log("/home" + window.location.href);
 
         }
         })

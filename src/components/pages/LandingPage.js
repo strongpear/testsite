@@ -15,7 +15,7 @@ export default function LandingPage() {
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     console.log(window.location.href);
-    window.location.replace(window.location.href+"home");
+    window.location.assign("/home");
     setUser(userObject);
     document.getElementById("signInDiv").hidden = false;
   }
