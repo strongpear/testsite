@@ -47,6 +47,7 @@ app.post('/register', (req, res) => {
     [username, email, password],
     (err, result) => {
         console.log(err);
+        console.log(result);
       }
     );
 })
@@ -60,6 +61,7 @@ app.post('/login', (req, res) => {
         "SELECT * FROM info WHERE username = $1 AND password = $2",
         [username, password],
         (err, result) => {
+            console.log(result)
             if (err) {
                 res.send({err: err}); //if error, next wont run
             }
