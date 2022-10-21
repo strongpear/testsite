@@ -12,13 +12,13 @@ export default function SignInPage() {
     const [password, setPassword] = useState("");
 
     const login = () => {
-        Axios.post('/login', {
+        Axios.post('http://localhost:3001/login', {
         username: username,
         password: password,
         }).then((response) => {
             console.log(response)
         if (response.data.message) { // failed authentication
-            console.log("failed authentication");
+            alert("failed authentication");
             document.getElementById("loginStatus").innerHTML = "Invalid Credentials";
         } else { // successful authentication
             document.getElementById("loginStatus").innerHTML = "";

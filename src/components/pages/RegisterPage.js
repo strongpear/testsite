@@ -11,7 +11,7 @@ export default function SignUpPage() {
   const [passwordReg, setPasswordReg] = useState('');
 
   const register = () => {
-    Axios.post('/register', {
+    Axios.post('http://localhost:3001/register', {
       username: usernameReg,
       email: emailReg, 
       password: passwordReg

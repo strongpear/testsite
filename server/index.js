@@ -22,6 +22,17 @@ const pool = new Pool({
     ssl: true,
   });
 
+
+  /*
+ const pool = new Pool({
+    user: 'my_user',
+    host: 'localhost',
+    database: 'login',
+    password: 'root',
+    port: 5432,
+}); */
+
+
 // Function to register the user
 app.post('/register', (req, res) => {
 
@@ -58,11 +69,5 @@ app.post('/login', (req, res) => {
         }
     )
 })
- /* const pool = new Pool({
-    user: 'my_user',
-    host: 'localhost',
-    database: 'login',
-    password: 'root',
-    port: 5432,
-}); */
+
 
