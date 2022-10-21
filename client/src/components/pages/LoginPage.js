@@ -1,7 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
+import jwt_decode from 'jwt-decode';
+
 
 import '../../App.css'
 
@@ -10,20 +12,45 @@ export default function SignInPage() {
     // UseStates for Login
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [user, setUser] = useState({});
+
+
+    function handleCallbackResponse(response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+        var userObject = jwt_decode(response.credential);
+        console.log(userObject);
+        console.log(window.location.href);
+        window.location.replace("/home");
+        setUser(userObject);
+        document.getElementById("signInDiv").hidden = false;
+      }
+
+    useEffect(() => {
+        /* global google */
+        google.accounts.id.initialize({
+          client_id: "787802789658-som6i2h91g2t708bhkg5m3aen4tb1rpa.apps.googleusercontent.com",
+          callback: handleCallbackResponse
+        })
+    
+        google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          { theme:"outline", size: "large" }
+        )
+    }, []);
 
     const login = () => {
-        Axios.post('http://localhost:3001/login', {
+        Axios.post('/login', {
         username: username,
         password: password,
         }).then((response) => {
             console.log(response)
         if (response.data.message) { // failed authentication
-            alert("failed authentication");
+            console.log("failed authentication");
             document.getElementById("loginStatus").innerHTML = "Invalid Credentials";
         } else { // successful authentication
             document.getElementById("loginStatus").innerHTML = "";
             window.location.assign("/home");
-            console.log("/home" + window.location.href);
+    
 
         }
         })
@@ -57,6 +84,7 @@ export default function SignInPage() {
                 
             </p>
             <label id="loginStatus"></label>
+            <div id="signInDiv"></div>
         </form>
 
         <footer>

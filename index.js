@@ -3,28 +3,27 @@ const express = require("express");
 const Pool = (require("pg")).Pool
 const cors = require("cors");
 require('dotenv').config()
+const path = require("path");
 
 
 const app = express();
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(cors());
+// app.use(express.static(path.join(__dirname, "client/build")))
+
+if (process.env.NODE_ENV === "production") {
+    //serve static content
+    // use npm run build
+    app.use(express.static(path.join(__dirname, "client/build")))
+}
 
 // Prints when running server
-app.listen(port, () => {
-  console.log("running server")
+app.listen(process.env.PORT | PORT, () => {
+  console.log(`running server on port ${PORT}`)
 })
-
-const connectStr = process.env.DATABASE_URL;
-const pool = new Pool({
-    connectionString: connectStr,
-    ssl: true,
-  });
-
-
-  /*
- const pool = new Pool({
+/*const pool = new Pool({
     user: 'my_user',
     host: 'localhost',
     database: 'login',
@@ -32,6 +31,20 @@ const pool = new Pool({
     port: 5432,
 }); */
 
+const devConfig = {
+    user: process.env.PG_USER,
+    password: process.env.PG_PASSWORD,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    port: process.env.PG_PORT
+};
+
+const proConfig = {
+    connectionString: process.env.DATABASE_URL //heroku addons
+}
+const pool = new Pool(
+    process.env.NODE_ENV === "production" ? proConfig : devConfig
+)
 
 // Function to register the user
 app.post('/register', (req, res) => {

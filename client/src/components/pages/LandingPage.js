@@ -15,7 +15,7 @@ export default function LandingPage() {
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     console.log(window.location.href);
-    window.location.assign("/home");
+    window.location.replace(window.location.href+"home");
     setUser(userObject);
     document.getElementById("signInDiv").hidden = false;
   }
@@ -30,7 +30,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     /* global google */
-    google.accounts.id.initialize({
+    /*google.accounts.id.initialize({
       client_id: "787802789658-som6i2h91g2t708bhkg5m3aen4tb1rpa.apps.googleusercontent.com",
       callback: handleCallbackResponse
     })
@@ -39,10 +39,8 @@ export default function LandingPage() {
       document.getElementById("signInDiv"),
       { theme:"outline", size: "large" }
     )
-
-    google.accounts.id.prompt()
-  }, []);
-
+*/
+  },  []);
   
   return (
         <div className="App">
