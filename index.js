@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(cors());
-// app.use(express.static(path.join(__dirname, "client/build")))
+app.use(express.static(path.join(__dirname, "client/build")))
 
 if (process.env.NODE_ENV === "production") {
     //serve static content
@@ -83,4 +83,6 @@ app.post('/login', (req, res) => {
     )
 })
 
-
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build/index.html"))
+})
