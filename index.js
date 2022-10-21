@@ -42,10 +42,10 @@ const devConfig = {
 const proConfig = {
     connectionString: process.env.DATABASE_URL //heroku addons
 }
-const pool = new Pool({
-    connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig
-})
-
+const pool = new Pool(
+    process.env.NODE_ENV === "production" ? proConfig : devConfig
+)
+console.log(`${pool.user}`)
 // Function to register the user
 app.post('/register', (req, res) => {
 
