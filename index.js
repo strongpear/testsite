@@ -35,7 +35,10 @@ const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD
 
 const proConfig = process.env.DATABASE_URL //heroku addons
 const pool = new Pool({
-    connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig
+    connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
+    ssl: {
+        rejectUnauthorized: false
+      }
 })
 // Function to register the user
 app.post('/register', (req, res) => {
@@ -56,12 +59,15 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-
+    console.log(`username is ${username}`)
+    console.log(`password is ${password}`)
+    
     pool.query(
+        
         "SELECT * FROM info WHERE username = $1 AND password = $2",
         [username, password],
         (err, result) => {
-            console.log(result)
+            console.log(`result is ${result}`)
             if (err) {
                 res.send({err: err}); //if error, next wont run
             }
