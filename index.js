@@ -36,9 +36,11 @@ const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD
 const proConfig = process.env.DATABASE_URL //heroku addons
 const pool = new Pool({
     connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
+
+    // comment out when in localhost
     ssl: {
         rejectUnauthorized: false
-      }
+      } 
 })
 // Function to register the user
 app.post('/register', (req, res) => {
@@ -83,6 +85,22 @@ app.post('/login', (req, res) => {
     )
 })
 
+app.post('/kycform', (req, res) => {
+
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    const driverid = req.body.driverid
+    const state = req.body.state
+    const zip = req.body.zip 
+    const birthdate = req.body.birthdate
+    pool.query("INSERT INTO kycform (firstname, lastname, driverid, state, zip, birthdate) VALUES ($1, $2, $3, $4, $5, $6)",
+    [firstname, lastname, driverid, state, zip, birthdate],
+    (err, result) => {
+        console.log(`error is ${err}`)
+        console.log(`result is ${result}`)
+      }
+    );
+})
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build/index.html"))
 })
