@@ -49,8 +49,8 @@ app.post('/register', (req, res) => {
     pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
     [username, email, password],
     (err, result) => {
-        console.log(err);
-        console.log(result);
+        console.log(`error is ${err}`)
+        console.log(`result is ${result}`)
       }
     );
 })
@@ -67,7 +67,7 @@ app.post('/login', (req, res) => {
         "SELECT * FROM info WHERE username = $1 AND password = $2",
         [username, password],
         (err, result) => {
-            console.log(err)
+            console.log(`error is ${err}`)
             console.log(`result is ${result}`)
             if (err) {
                 res.send({err: err}); //if error, next wont run
