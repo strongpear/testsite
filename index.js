@@ -67,6 +67,7 @@ app.post('/login', (req, res) => {
         "SELECT * FROM info WHERE username = $1 AND password = $2",
         [username, password],
         (err, result) => {
+            console.log(err)
             console.log(`result is ${result}`)
             if (err) {
                 res.send({err: err}); //if error, next wont run
