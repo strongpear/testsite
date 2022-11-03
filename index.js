@@ -4,13 +4,37 @@ const Pool = (require("pg")).Pool
 const cors = require("cors");
 require('dotenv').config()
 const path = require("path");
-
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser")
+const session = require("express-session")
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
+app.use(
+    cors({
+      //origin: ["http://localhost:3000"],
+      //methods: ["GET", "POST"],
+      credentials: true,
+    })
+  );
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "userId",
+    secret: "subscribe", 
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 4,
+    },
+  })
+);
+
 // app.use(express.static(path.join(__dirname, "client/build")))
 
 if (process.env.NODE_ENV === "production") {
@@ -37,10 +61,11 @@ const proConfig = process.env.DATABASE_URL //heroku addons
 const pool = new Pool({
     connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
 
-    // comment out when in localhost
+    /* comment out when in localhost 
     ssl: {
         rejectUnauthorized: false
-      } 
+      }
+    */ 
 })
 // Function to register the user
 app.post('/register', (req, res) => {
@@ -57,12 +82,18 @@ app.post('/register', (req, res) => {
     );
 })
 
+app.get('/login', (req, res) => {
+    if (req.session.user) {
+      res.send({ loggedIn: true, user: req.session.user });
+    } else {
+      res.send({ loggedIn: false });
+    }
+  }); 
+
 // Function to authenticate user
 app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    console.log(`username is ${username}`)
-    console.log(`password is ${password}`)
     
     pool.query(
         
@@ -76,15 +107,38 @@ app.post('/login', (req, res) => {
             }
             // If we have found someone with that username/pass combo
             if (result.rows.length > 0) {
+                req.session.user = result;
+                console.log(req.session.user);
+                //console.log(result)
+                console.log("success")
                 res.send(result)
             }
             else {
+                console.log("failed")
                 res.send({message: "Invalid Credentials."})
             }
         }
     )
 })
 
+app.post('/logout', (req, res) => {
+  req.session.user = "";
+})
+/*
+// Get kycform data
+app.get('/admin', (req, res) => {
+  pool.query("SELECT * FROM kycform",
+  (err, result) => {
+      if (err) {
+          res.send({err: err})
+      }
+      else{
+          res.send(result)
+      }
+    }
+  );
+})
+*/
 app.post('/kycform', (req, res) => {
 
     const firstname = req.body.firstname

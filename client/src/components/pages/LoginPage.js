@@ -7,6 +7,8 @@ import jwt_decode from 'jwt-decode';
 
 import '../../App.css'
 
+Axios.defaults.withCredentials = true
+
 export default function SignInPage() {
 
     // UseStates for Login
@@ -44,6 +46,7 @@ export default function SignInPage() {
         password: password,
         }).then((response) => {
             console.log(response)
+            console.log("hello")
         if (response.data.message) { // failed authentication
             console.log("failed authentication");
             document.getElementById("loginStatus").innerHTML = "Invalid Credentials";
@@ -56,7 +59,11 @@ export default function SignInPage() {
         })
 
     }
-
+    useEffect(() => {
+        Axios.get('/login').then((response) => {
+            console.log(response)
+        } );
+    }, []) 
     return (
     <div className="text-center m-5-auto">
         <h2>Sign in to us</h2>

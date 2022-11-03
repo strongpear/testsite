@@ -1,7 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Axios from "axios";
+
+Axios.defaults.withCredentials = true
 
 export default function HomePage() {
+
+    const logOut = () => {
+        Axios.post('/logout').then((response) => {
+            console.log("logged out")
+        })
+    }
     return (
         <div className="text-center">
             <h1 className="main-title home-page-title">welcome to our app</h1>
@@ -10,7 +19,7 @@ export default function HomePage() {
             </Link>
 
             <Link to="/">
-                <button className="primary-button">Log out</button>
+                <button className="primary-button" onClick={ logOut }>Log out</button>
             </Link>
         </div>
     )
