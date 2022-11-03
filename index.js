@@ -124,7 +124,7 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
   req.session.user = "";
 })
-/*
+
 // Get kycform data
 app.get('/admin', (req, res) => {
   pool.query("SELECT * FROM kycform",
@@ -138,7 +138,7 @@ app.get('/admin', (req, res) => {
     }
   );
 })
-*/
+
 app.post('/kycform', (req, res) => {
 
     const firstname = req.body.firstname
