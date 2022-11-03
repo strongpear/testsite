@@ -61,11 +61,11 @@ const proConfig = process.env.DATABASE_URL //heroku addons
 const pool = new Pool({
     connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
 
-    /* comment out when in localhost 
+    /* comment out when in localhost */
     ssl: {
         rejectUnauthorized: false
       }
-    */ 
+
 })
 // Function to register the user
 app.post('/register', (req, res) => {
