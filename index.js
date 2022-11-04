@@ -126,9 +126,9 @@ app.post('/logout', (req, res) => {
 })
 
 // Get kycform data
-/* app.get('/admin', (req, res) => {
-  console.log("on admin side")
-  console.log(pool.query("SELECT * FROM kycform"))
+app.get('/admin', (req, res) => {
+  //console.log("on admin side")
+  //console.log(pool.query("SELECT * FROM kycform"))
   pool.query("SELECT * FROM kycform",
   (err, result) => {
       if (err) {
@@ -140,7 +140,8 @@ app.post('/logout', (req, res) => {
     }
   );
 })
-*/ 
+
+/*
 app.get('/admin', (req, res) => {
   console.log("on admin side")
   pool.query("SELECT * FROM kycform",
@@ -150,7 +151,7 @@ app.get('/admin', (req, res) => {
       }
   );
 })
-
+*/
 app.post('/kycform', (req, res) => {
 
     const firstname = req.body.firstname
