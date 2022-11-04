@@ -61,7 +61,7 @@ const proConfig = process.env.DATABASE_URL //heroku addons
 const pool = new Pool({
     connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
 
-    /* comment out when in localhost */
+    // comment out when in localhost
     ssl: {
         rejectUnauthorized: false
       }
@@ -126,7 +126,9 @@ app.post('/logout', (req, res) => {
 })
 
 // Get kycform data
-app.post('/admin', (req, res) => {
+/* app.get('/admin', (req, res) => {
+  console.log("on admin side")
+  console.log(pool.query("SELECT * FROM kycform"))
   pool.query("SELECT * FROM kycform",
   (err, result) => {
       if (err) {
@@ -136,6 +138,16 @@ app.post('/admin', (req, res) => {
           res.send(result)
       }
     }
+  );
+})
+*/ 
+app.get('/admin', (req, res) => {
+  console.log("on admin side")
+  pool.query("SELECT * FROM kycform",
+  (err, result) => {
+        console.log(result)
+        res.send(result)
+      }
   );
 })
 
