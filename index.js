@@ -126,7 +126,7 @@ app.post('/logout', (req, res) => {
 })
 
 // Get kycform data
-app.get('/admin', (req, res) => {
+app.post('/admin', (req, res) => {
   //console.log("on admin side")
   //console.log(pool.query("SELECT * FROM kycform"))
   pool.query("SELECT * FROM kycform",
