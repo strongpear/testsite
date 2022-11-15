@@ -82,13 +82,13 @@ app.post('/register', (req, res) => {
     );
 })
 
-app.get('/login', (req, res) => {
-    if (req.session.user) {
-      res.send({ loggedIn: true, user: req.session.user });
-    } else {
-      res.send({ loggedIn: false });
-    }
-  }); 
+// app.get('/login', (req, res) => {
+//     if (req.session.user) {
+//       res.send({ loggedIn: true, user: req.session.user });
+//     } else {
+//       res.send({ loggedIn: false });
+//     }
+//   }); 
 
 // Function to authenticate user
 app.post('/login', (req, res) => {
@@ -109,6 +109,9 @@ app.post('/login', (req, res) => {
             if (result.rows.length > 0) {
                 req.session.user = result;
                 console.log(req.session.user);
+                if (req.session.user) {
+                  res.send({ loggedIn: true, user: req.session.user });
+                }
                 //console.log(result)
                 console.log("success")
                 res.send(result)
