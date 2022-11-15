@@ -60,11 +60,11 @@ export default function SignInPage() {
         })
 
     }
-    useEffect(() => {
-        Axios.get('/login').then((response) => {
-            console.log(response)
-        } );
-    }, []) 
+    // useEffect(() => {
+    //     Axios.get('/login').then((response) => {
+    //         console.log(response)
+    //     } );
+    // }, []) 
     return (
     <div className="text-center m-5-auto">
         <h2>Sign in to us</h2>

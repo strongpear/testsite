@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
     cors({
       //origin: ["http://localhost:3000"],
-      methods: ["GET", "POST"],
+      //methods: ["GET", "POST"],
       credentials: true,
     })
   );
@@ -109,9 +109,6 @@ app.post('/login', (req, res) => {
             if (result.rows.length > 0) {
                 req.session.user = result;
                 console.log(req.session.user);
-                if (req.session.user) {
-                  res.send({ loggedIn: true, user: req.session.user });
-                }
                 //console.log(result)
                 console.log("success")
                 res.send(result)
@@ -129,7 +126,7 @@ app.post('/logout', (req, res) => {
 })
 
 // Get kycform data
-app.post('/admin', (req, res) => {
+app.get('/admin', (req, res) => {
   //console.log("on admin side")
   //console.log(pool.query("SELECT * FROM kycform"))
   pool.query("SELECT * FROM kycform",
