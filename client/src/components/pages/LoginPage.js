@@ -50,6 +50,8 @@ export default function SignInPage() {
         if (response.data.message) { // failed authentication
             console.log("failed authentication");
             document.getElementById("loginStatus").innerHTML = "Invalid Credentials";
+            window.location.assign("/admin");
+            
         } else { // successful authentication
             document.getElementById("loginStatus").innerHTML = "";
             window.location.assign("/home");
