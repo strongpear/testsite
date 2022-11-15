@@ -54,6 +54,7 @@ export default function SignInPage() {
             document.getElementById("loginStatus").innerHTML = "";
             window.location.assign("/home");
     
+        // on login success show a button that goes to home
 
         }
         })
