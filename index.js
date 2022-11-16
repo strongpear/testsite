@@ -101,38 +101,67 @@ app.post('/register', (req, res) => {
 
 // Function to authenticate user
 app.post('/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    
-    pool.query(
-        
-        "SELECT * FROM info WHERE username = $1 AND password = $2",
-        [username, password],
-        (err, result) => {
-            console.log(`error is ${err}`)
-            console.log(`result is ${result}`)
-            if (err) {
-                res.send({err: err}); //if error, next wont run
-            }
-            // If we have found someone with that username/pass combo
-            if (result.rows.length > 0) {
-              bcrypt.compare(password, result[0].password, (error, response) => {
-                if (response) {
-                  req.session.user = result;
-                  console.log(req.session.user);
-                  console.log("success")
-                  res.send(result);
-                } else {
-                  console.log("failed")
-                  res.send({message: "Invalid Credentials."})
-                }
-              });
-            } else{
-              res.send({ message: "User doesn't exist" });
-            }
+  const username = req.body.username;
+  const password = req.body.password;
+  
+  pool.query(
+      
+      "SELECT * FROM info WHERE username = $1 AND password = $2",
+      [username, password],
+      (err, result) => {
+          console.log(`error is ${err}`)
+          console.log(`result is ${result}`)
+          if (err) {
+              res.send({err: err}); //if error, next wont run
           }
-    )
+          // If we have found someone with that username/pass combo
+          if (result.rows.length > 0) {
+              req.session.user = result;
+              console.log(req.session.user);
+              //console.log(result)
+              console.log("success")
+              res.send(result)
+          }
+          else {
+              console.log("failed")
+              res.send({message: "Invalid Credentials."})
+          }
+      }
+  )
 })
+// app.post('/login', (req, res) => {
+//     const username = req.body.username;
+//     const password = req.body.password;
+    
+//     pool.query(
+        
+//         "SELECT * FROM info WHERE username = $1 AND password = $2",
+//         [username, password],
+//         (err, result) => {
+//             console.log(`error is ${err}`)
+//             console.log(`result is ${result}`)
+//             if (err) {
+//                 res.send({err: err}); //if error, next wont run
+//             }
+//             // If we have found someone with that username/pass combo
+//             if (result.rows.length > 0) {
+//               bcrypt.compare(password, password, (error, response) => {
+//                 if (response) {
+//                   req.session.user = result;
+//                   console.log(req.session.user);
+//                   console.log("success")
+//                   res.send(result);
+//                 } else {
+//                   console.log("failed")
+//                   res.send({message: "Invalid Credentials."})
+//                 }
+//               });
+//             } else{
+//               res.send({ message: "User doesn't exist" });
+//             }
+//           }
+//     )
+// })
 
 app.post('/logout', (req, res) => {
   req.session.user = "";
