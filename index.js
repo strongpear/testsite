@@ -8,6 +8,10 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 
+
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -73,13 +77,18 @@ app.post('/register', (req, res) => {
     const username = req.body.username
     const email = req.body.email
     const password = req.body.password
-    pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-    [username, email, password],
-    (err, result) => {
-        console.log(`error is ${err}`)
-        console.log(`result is ${result}`)
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+      if (err) {
+        console.log(err);
       }
-    );
+      pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+      [username, email, hash],
+      (err, result) => {
+          console.log(`error is ${err}`)
+          console.log(`result is ${result}`)
+        }
+      );
+    });
 })
 
 // app.get('/login', (req, res) => {
@@ -107,16 +116,17 @@ app.post('/login', (req, res) => {
             }
             // If we have found someone with that username/pass combo
             if (result.rows.length > 0) {
-                req.session.user = result;
-                console.log(req.session.user);
-                //console.log(result)
-                console.log("success")
-                res.send(result)
-            }
-            else {
-                console.log("failed")
-                res.send({message: "Invalid Credentials."})
-            }
+              bcrypt.compare(password, result[0].password, (error, response) => {
+                if (response) {
+                  req.session.user = result;
+                  console.log(req.session.user);
+                  console.log("success")
+                  res.send(result);
+                } else {
+                  console.log("failed")
+                  res.send({message: "Invalid Credentials."})
+                }
+              });
         }
     )
 })
