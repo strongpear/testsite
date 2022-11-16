@@ -127,7 +127,10 @@ app.post('/login', (req, res) => {
                   res.send({message: "Invalid Credentials."})
                 }
               });
-        }
+            } else{
+              res.send({ message: "User doesn't exist" });
+            }
+          }
     )
 })
 
