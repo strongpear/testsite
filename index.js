@@ -98,7 +98,8 @@ app.post('/register', (req, res) => {
       console.log(err);
     }
     pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-    [username, email, hash],
+    //[username, email, hash],
+    [username, email, password],
     (err, result) => {
       console.log(`hash now is ${hash}`)
       console.log(`error is ${err}`)
@@ -159,7 +160,8 @@ app.post('/login', (req, res) => {
     pool.query(
         
         "SELECT * FROM info WHERE username = $1 AND password = $2",
-        [username, hash],
+        [username, passwords],
+        //[username, hash],
         (err, result) => {
             console.log(`error is ${err}`)
             console.log(`result is ${result}`)
