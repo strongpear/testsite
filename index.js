@@ -82,7 +82,6 @@ app.post('/register', (req, res) => {
     (err, result) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
-        console.log(`userid register is ${req.session.user}`);
       }
     );
 })
@@ -134,8 +133,8 @@ app.post('/login', (req, res) => {
             }
             // If we have found someone with that username/pass combo
             if (result.rows.length > 0) {
-                req.session.user = username;
-                console.log(`userid login is ${req.session.user}`);
+                req.session.user = result;
+                console.log(req.session.user);
                 //console.log(result)
                 console.log("success")
                 res.send(result)
@@ -186,23 +185,20 @@ app.post('/login', (req, res) => {
 // })
 
 app.post('/logout', (req, res) => {
-  //req.session.user = "";
-  delete req.session.user;
-  console.log(`userid logout is ${req.session.user}`);;
+  req.session.user = "";
+  console.log(req.session.user);
 })
 
 // Get kycform data
 app.post('/admin', (req, res) => {
-  console.log("on admin side")
+  //console.log("on admin side")
   //console.log(pool.query("SELECT * FROM kycform"))
   pool.query("SELECT * FROM kycform",
   (err, result) => {
       if (err) {
-          console.log(`userid logout is ${req.session.user.username}`);
           res.send({err: err})
       }
       else{
-          console.log(`userid logout is ${req.session.user.username}`);
           res.send(result)
       }
     }
@@ -233,7 +229,6 @@ app.post('/kycform', (req, res) => {
     (err, result) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
-        console.log(`userid adminpage is ${req.session.user}`);
       }
     );
 })
