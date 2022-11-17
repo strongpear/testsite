@@ -72,42 +72,41 @@ const pool = new Pool({
 
 })
 // Function to register the user
-// app.post('/register', (req, res) => {
+app.post('/register', (req, res) => {
 
-//     const username = req.body.username
-//     const email = req.body.email
-//     const password = req.body.password
-//     pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-//     [username, email, password],
-//     (err, result) => {
-//         console.log(`error is ${err}`)
-//         console.log(`result is ${result}`)
-//       }
-//     );
-// })
+    const username = req.body.username
+    const email = req.body.email
+    const password = req.body.password
+    pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+    [username, email, password],
+    (err, result) => {
+        console.log(`error is ${err}`)
+        console.log(`result is ${result}`)
+      }
+    );
+})
 
 // WIth password Hashing
 
-app.post('/register', (req, res) => {
+// app.post('/register', (req, res) => {
 
-  const username = req.body.username
-  const email = req.body.email
-  const password = req.body.password
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) {
-      console.log(err);
-    }
-    pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-    //[username, email, hash],
-    [username, email, password],
-    (err, result) => {
-      console.log(`hash now is ${hash}`)
-      console.log(`error is ${err}`)
-      console.log(`result is ${result}`)
-    }
-    );
-  });
-})
+//   const username = req.body.username
+//   const email = req.body.email
+//   const password = req.body.password
+//   bcrypt.hash(password, saltRounds, (err, hash) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+//     [username, email, hash],
+//     (err, result) => {
+//       console.log(`hash now is ${hash}`)
+//       console.log(`error is ${err}`)
+//       console.log(`result is ${result}`)
+//     }
+//     );
+//   });
+// })
 
 // app.get('/login', (req, res) => {
 //     if (req.session.user) {
@@ -118,54 +117,17 @@ app.post('/register', (req, res) => {
 //   }); 
 
 // Function to authenticate user
-// app.post('/login', (req, res) => {
-//     const username = req.body.username;
-//     const password = req.body.password;
-    
-//     pool.query(
-        
-//         "SELECT * FROM info WHERE username = $1 AND password = $2",
-//         [username, password],
-//         (err, result) => {
-//             console.log(`error is ${err}`)
-//             console.log(`result is ${result}`)
-//             if (err) {
-//                 res.send({err: err}); //if error, next wont run
-//             }
-//             // If we have found someone with that username/pass combo
-//             if (result.rows.length > 0) {
-//                 req.session.user = result;
-//                 console.log(req.session.user);
-//                 //console.log(result)
-//                 console.log("success")
-//                 res.send(result)
-//             }
-//             else {
-//                 console.log("failed")
-//                 res.send({message: "Invalid Credentials."})
-//             }
-//         }
-//     )
-// })
-
-// With password hashing
-
 app.post('/login', (req, res) => {
-  const username = req.body.username;
-  const passwords = req.body.password;
-  bcrypt.hash(passwords, saltRounds, (err, hash) => {
-    if (err) {
-      console.log(err);
-    }
+    const username = req.body.username;
+    const password = req.body.password;
+    
     pool.query(
         
         "SELECT * FROM info WHERE username = $1 AND password = $2",
-        [username, passwords],
-        //[username, hash],
+        [username, password],
         (err, result) => {
             console.log(`error is ${err}`)
             console.log(`result is ${result}`)
-            console.log(`hash is ${hash}`)
             if (err) {
                 res.send({err: err}); //if error, next wont run
             }
@@ -183,8 +145,44 @@ app.post('/login', (req, res) => {
             }
         }
     )
-  });
-})
+ })
+
+// With password hashing
+
+// app.post('/login', (req, res) => {
+//   const username = req.body.username;
+//   const passwords = req.body.password;
+//   bcrypt.hash(passwords, saltRounds, (err, hash) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     pool.query(
+        
+//         "SELECT * FROM info WHERE username = $1 AND password = $2",
+//         [username, hash],
+//         (err, result) => {
+//             console.log(`error is ${err}`)
+//             console.log(`result is ${result}`)
+//             console.log(`hash is ${hash}`)
+//             if (err) {
+//                 res.send({err: err}); //if error, next wont run
+//             }
+//             // If we have found someone with that username/pass combo
+//             if (result.rows.length > 0) {
+//                 req.session.user = result;
+//                 console.log(req.session.user);
+//                 //console.log(result)
+//                 console.log("success")
+//                 res.send(result)
+//             }
+//             else {
+//                 console.log("failed")
+//                 res.send({message: "Invalid Credentials."})
+//             }
+//         }
+//     )
+//   });
+// })
 
 app.post('/logout', (req, res) => {
   req.session.user = "";
