@@ -198,11 +198,11 @@ app.post('/admin', (req, res) => {
   pool.query("SELECT * FROM kycform",
   (err, result) => {
       if (err) {
-        console.log(`userid logout is ${req.session.user.username}`);
+          console.log(`userid logout is ${req.session.user.username}`);
           res.send({err: err})
       }
       else{
-        console.log(`userid logout is ${req.session.user.username}`);
+          console.log(`userid logout is ${req.session.user.username}`);
           res.send(result)
       }
     }
