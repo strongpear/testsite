@@ -82,6 +82,7 @@ app.post('/register', (req, res) => {
     (err, result) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
+        console.log(`userui is ${req.session.user}`);
       }
     );
 })
@@ -134,7 +135,7 @@ app.post('/login', (req, res) => {
             // If we have found someone with that username/pass combo
             if (result.rows.length > 0) {
                 req.session.user = result;
-                console.log(req.session.user);
+                console.log(`userui is ${req.session.user}`);
                 //console.log(result)
                 console.log("success")
                 res.send(result)
@@ -186,7 +187,7 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
   req.session.user = "";
-  console.log(req.session.user);
+  console.log(`userui is ${req.session.user}`);;
 })
 
 // Get kycform data
@@ -195,7 +196,7 @@ app.post('/admin', (req, res) => {
   //console.log(pool.query("SELECT * FROM kycform"))
   pool.query("SELECT * FROM kycform",
   (err, result) => {
-    console.log(req.session.user);
+    console.log(`userui is ${req.session.user}`);
       if (err) {
           res.send({err: err})
       }
@@ -230,7 +231,7 @@ app.post('/kycform', (req, res) => {
     (err, result) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
-        console.log(req.session.user);
+        console.log(`userui is ${req.session.user}`);
       }
     );
 })
