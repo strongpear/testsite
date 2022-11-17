@@ -211,7 +211,16 @@ app.post('/admin', (req, res) => {
     }
   );
 })
-
+app.post('/home', (req, res) => {
+  console.log("The home page:")
+  console.log(req.session.user);
+  if(req.session.user){
+    res.send(`Welcome ${req.session.user}`);
+  }
+  else{
+    res.send("Welcome to Jaspal's app");
+  }
+})
 /*
 app.get('/admin', (req, res) => {
   console.log("on admin side")

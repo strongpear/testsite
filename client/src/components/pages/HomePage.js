@@ -1,10 +1,18 @@
+import Axios from "axios";
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
 
 Axios.defaults.withCredentials = true
 
 export default function HomePage() {
+    const [username, setUsername] = useState([])
+
+    const getKYC = async () => {
+        const res = await Axios.post('/home');
+        console.log(res)
+        setUsername(res.data.rows);
+    }
 
     const logOut = () => {
         Axios.post('/logout').then((response) => {
