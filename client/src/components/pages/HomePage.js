@@ -12,7 +12,7 @@ export default function HomePage() {
         })
     }
     const kyc = () => {
-        Axios.post('/kyc').then((response) => {
+        Axios.post('/kycform').then((response) => {
             console.log("logged out")
         })
     }
