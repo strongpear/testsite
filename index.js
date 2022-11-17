@@ -188,20 +188,21 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
   //req.session.user = "";
   delete req.session.user;
-  console.log(`userui is ${req.session.user}`);;
+  console.log(`userid logout is ${req.session.user}`);;
 })
 
 // Get kycform data
 app.post('/admin', (req, res) => {
-  //console.log("on admin side")
+  console.log("on admin side")
   //console.log(pool.query("SELECT * FROM kycform"))
   pool.query("SELECT * FROM kycform",
   (err, result) => {
-    console.log(`userid logout is ${req.session.user.username}`);
       if (err) {
+        console.log(`userid logout is ${req.session.user.username}`);
           res.send({err: err})
       }
       else{
+        console.log(`userid logout is ${req.session.user.username}`);
           res.send(result)
       }
     }
@@ -232,7 +233,7 @@ app.post('/kycform', (req, res) => {
     (err, result) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
-        console.log(`userid admin is ${req.session.user}`);
+        console.log(`userid adminpage is ${req.session.user}`);
       }
     );
 })
