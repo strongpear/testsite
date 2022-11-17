@@ -218,7 +218,7 @@ app.post('/home', (req, res) => {
     res.send(`Welcome ${req.session.user}`);
   }
   else{
-    res.send("Welcome to Jaspal's app");
+    res.send("Welcome to Jaspal's app. No user signed in.");
   }
 })
 /*

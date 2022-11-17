@@ -11,7 +11,7 @@ export default function HomePage() {
     const getKYC = async () => {
         const res = await Axios.post('/home');
         console.log(res)
-        setUsername(res.data.rows);
+        setUsername(res);
     }
 
     const logOut = () => {
