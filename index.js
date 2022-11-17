@@ -190,7 +190,7 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
   console.log("The logout page:")
   console.log(req.session.user);
-  delete req.session.user;
+  //delete req.session.user;
   console.log(req.session.user);
 })
 
