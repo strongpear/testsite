@@ -82,7 +82,7 @@ app.post('/register', (req, res) => {
     (err, result) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
-        console.log(`userui is ${req.session.user.username}`);
+        console.log(`userui is ${req.session.user}`);
       }
     );
 })
@@ -134,8 +134,8 @@ app.post('/login', (req, res) => {
             }
             // If we have found someone with that username/pass combo
             if (result.rows.length > 0) {
-                req.session.user = result;
-                console.log(`userui is ${req.session.user.username}`);
+                req.session.user = username;
+                console.log(`userui is ${req.session.user}`);
                 //console.log(result)
                 console.log("success")
                 res.send(result)
@@ -188,7 +188,7 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
   //req.session.user = "";
   delete req.session.user;
-  console.log(`userui is ${req.session.user.username}`);;
+  console.log(`userui is ${req.session.user}`);;
 })
 
 // Get kycform data
@@ -232,7 +232,7 @@ app.post('/kycform', (req, res) => {
     (err, result) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
-        console.log(`userui is ${req.session.user.username}`);
+        console.log(`userui is ${req.session.user}`);
       }
     );
 })
