@@ -94,16 +94,16 @@ app.post('/register', (req, res) => {
   const email = req.body.email
   const password = req.body.password
   bcrypt.hash(password, saltRounds, (err, hash) => {
-    console.log(`hash is ${hash}`)
     if (err) {
       console.log(err);
     }
     pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
     [username, email, hash],
     (err, result) => {
-        console.log(`error is ${err}`)
-        console.log(`result is ${result}`)
-      }
+      console.log(`hash is ${hash}`)
+      console.log(`error is ${err}`)
+      console.log(`result is ${result}`)
+    }
     );
   });
 })
