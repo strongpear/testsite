@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import '../../App.css'
-
+Axios.defaults.withCredentials = true
 export default function ForgetPasswordPage() {
     return (
         <div className="text-center m-5-auto">

@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 
 import '../../App.css'
 import BackgroundImage from '../../assets/images/bg.png'
-
+Axios.defaults.withCredentials = true
 export default function LandingPage() {
     const [user, setUser] = useState({});
 

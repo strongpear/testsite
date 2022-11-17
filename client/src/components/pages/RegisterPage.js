@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
 import '../../App.css'
-
+Axios.defaults.withCredentials = true
 export default function SignUpPage() {
   const [usernameReg, setUsernameReg] = useState('');
   const [emailReg, setEmailReg] = useState('');
