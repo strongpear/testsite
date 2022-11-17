@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React from 'react'
 import { Link } from 'react-router-dom'
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 Axios.defaults.withCredentials = true
 
