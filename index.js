@@ -133,7 +133,7 @@ app.post('/login', (req, res) => {
             }
             // If we have found someone with that username/pass combo
             if (result.rows.length > 0) {
-                req.session.user = result;
+                req.session.user = username;
                 console.log(req.session.user);
                 //console.log(result)
                 console.log("success")
@@ -185,7 +185,7 @@ app.post('/login', (req, res) => {
 // })
 
 app.post('/logout', (req, res) => {
-  req.session.user = "";
+  delete req.session.user;
   console.log(req.session.user);
 })
 
