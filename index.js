@@ -100,7 +100,7 @@ app.post('/register', (req, res) => {
     pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
     [username, email, hash],
     (err, result) => {
-      console.log(`hash is ${hash}`)
+      console.log(`hash now is ${hash}`)
       console.log(`error is ${err}`)
       console.log(`result is ${result}`)
     }
