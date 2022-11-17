@@ -94,6 +94,7 @@ app.post('/register', (req, res) => {
   const email = req.body.email
   const password = req.body.password
   bcrypt.hash(password, saltRounds, (err, hash) => {
+    console.log(`hash is ${hash}`)
     if (err) {
       console.log(err);
     }
@@ -162,6 +163,7 @@ app.post('/login', (req, res) => {
         (err, result) => {
             console.log(`error is ${err}`)
             console.log(`result is ${result}`)
+            console.log(`hash is ${hash}`)
             if (err) {
                 res.send({err: err}); //if error, next wont run
             }
