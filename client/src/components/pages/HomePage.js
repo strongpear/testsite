@@ -8,11 +8,14 @@ Axios.defaults.withCredentials = true
 export default function HomePage() {
     const [username, setUsername] = useState([])
 
-    const getKYC = async () => {
+    const getUsername = async () => {
         const res = await Axios.post('/home');
         console.log(res)
         setUsername(res);
     }
+    useEffect(() => {
+        getUsername();
+    }, []);
 
     const logOut = () => {
         Axios.post('/logout').then((response) => {
