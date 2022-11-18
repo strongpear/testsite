@@ -1,8 +1,6 @@
-import Axios from "axios";
-import React from 'react'
 import { Link } from 'react-router-dom'
-import { Fragment, useEffect, useState } from "react";
-
+import Axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
 Axios.defaults.withCredentials = true
 
 export default function HomePage() {
@@ -10,6 +8,7 @@ export default function HomePage() {
 
     const getUsername = async () => {
         const res = await Axios.post('/home');
+        console.log(`This is the front end for the homepage`)
         console.log(res)
         setUsername(res);
     }
