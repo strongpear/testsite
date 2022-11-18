@@ -24,8 +24,8 @@ export default function HomePage() {
             console.log("logged out")
         })
     }
-    //console.log(username)
-    var targetOfGreeting = username.toString();;
+    console.log(username)
+    var targetOfGreeting = "world";
     return (
         <div className="text-center">
             <h1 className="main-title home-page-title">Testing { targetOfGreeting }</h1>
