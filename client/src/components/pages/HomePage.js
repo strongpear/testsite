@@ -25,7 +25,7 @@ export default function HomePage() {
         })
     }
     //console.log(username)
-    var targetOfGreeting = "world";
+    var targetOfGreeting = username;
     return (
         <div className="text-center">
             <h1 className="main-title home-page-title">Testing { targetOfGreeting }</h1>
