@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom'
 import Axios from "axios";
-import React, { Fragment, useEffect, useState } from "react";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Fragment, useEffect, useState } from "react";
+
 Axios.defaults.withCredentials = true
 
 export default function HomePage() {
