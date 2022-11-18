@@ -28,7 +28,7 @@ export default function HomePage() {
     var targetOfGreeting = "world";
     return (
         <div className="text-center">
-            <h1 className="main-title home-page-title">"Testing " +{targetOfGreeting}</h1>
+            <h1 className="main-title home-page-title">"Testing " +{ targetOfGreeting }</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
             </Link>
