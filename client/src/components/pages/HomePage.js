@@ -25,7 +25,7 @@ export default function HomePage() {
     }
     return (
         <div className="text-center">
-            <h1 className="main-title home-page-title">{username}</h1>
+            <h1 className="main-title home-page-title">Welcome</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
             </Link>
