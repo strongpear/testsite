@@ -210,8 +210,8 @@ app.post('/login', (req, res) => {
       [username],
       (err, result) => {
         console.log(`result is ${result}`)
-        console.log(`result.data is ${result.data}`)
-        bcrypt.compare(plaintextPassword, result.data, function(err, result) {
+        console.log(`result.rows is ${result.rows}`)
+        bcrypt.compare(plaintextPassword, result.rows, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
           if (err) {
