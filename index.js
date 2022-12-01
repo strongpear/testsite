@@ -73,13 +73,42 @@ app.post('/register', (req, res) => {
     const username = req.body.username
     const email = req.body.email
     const password = req.body.password
-    pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-    [username, email, password],
+    pool.query("SELECT * FROM info WHERE username = $1", [username],
     (err, result) => {
-        console.log(`error is ${err}`)
-        console.log(`result is ${result}`)
+      if (result.rows.length >= 1) {
+        console.log(`Duplicate Username`)
       }
-    );
+      else {
+        pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+        [username, email, password],
+        (err, result) => {
+          console.log(`error is ${err}`)
+          console.log(`result is ${result}`)
+        });
+      }
+    });
+})
+
+app.post('/send', (req, res) => {
+    const sender = req.session.user
+    const receiver = req.body.receiver
+    const amount = req.body.amount
+    
+    // Decrease sender amount
+    pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
+    [amount, sender],
+    (err, result) => {
+      console.log(`error is ${err}`)
+      console.log(`result is ${result}`)
+    })
+    
+    // Increase receiver amount
+    pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
+    [amount, receiver],
+    (err, result) => {
+      console.log(`error is ${err}`)
+      console.log(`result is ${result}`)
+    })
 })
 
 // app.get('/login', (req, res) => {
