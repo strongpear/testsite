@@ -161,7 +161,7 @@ app.post('/login', (req, res) => {
   const username = req.body.username;
   const passwords = req.body.password;
   bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, function(err, hash) {
+    bcrypt.hash(passwords, salt, function(err, hash) {
     //bcrypt.hash(passwords, saltRounds, (err, hash) => {
       if (err) {
         console.log(err);
