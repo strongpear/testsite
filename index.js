@@ -209,7 +209,8 @@ app.post('/login', (req, res) => {
       "SELECT * FROM info WHERE username = $1",
       [username],
       (err, result) => {
-        
+
+        original_result = result;
         console.log(`result is ${result}`)
         console.log(`result.rows is ${result.rows}`)
         console.log(`result.rows[0] is ${result.rows[0]}`)
@@ -227,7 +228,7 @@ app.post('/login', (req, res) => {
               console.log(req.session.user);
               //console.log(result)
               console.log("success")
-              res.send(result)
+              res.send(original_result)
           }
           else {
               console.log("failed")
