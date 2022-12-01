@@ -29,6 +29,10 @@ export default function SignUpPage() {
                     <label>Username</label><br/>
                     <input 
                         type="text"
+                        required
+                        pattern=".{6,}"
+                        title="Username must contain 6 or more characters"
+                        placeholder="username123"
                         id="usernameReg"
                         onChange = {(e) => {setUsernameReg(e.target.value);}}
                     />
@@ -37,6 +41,9 @@ export default function SignUpPage() {
                     <label>Email address</label><br/>
                     <input 
                         type="text"
+                        required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        placeholder="email@email.com"
                         id="emailReg"
                         onChange = {(e) => {setEmailReg(e.target.value);}} 
                     /> 
@@ -45,6 +52,9 @@ export default function SignUpPage() {
                     <label>Password</label><br/>
                     <input 
                         type="password"
+                        required
+                        pattern=".{6,}"
+                        title="Password must contain 6 or more characters"
                         id="passwordReg"
                         onChange = {(e) => {setPasswordReg(e.target.value);}}
                     />
