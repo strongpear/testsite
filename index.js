@@ -95,19 +95,22 @@ app.post('/register', (req, res) => {
   const username = req.body.username
   const email = req.body.email
   const password = req.body.password
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) {
-      console.log(err);
-    }
-    pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-    [username, email, hash],
-    (err, result) => {
-      console.log(`hash now is ${hash}`)
-      console.log(`error is ${err}`)
-      console.log(`result is ${result}`)
-    }
-    );
-  });
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    bcrypt.hash(password, salt, function(err, hash) {
+    //bcrypt.hash(password, saltRounds, (err, hash) => {
+      if (err) {
+        console.log(err);
+      }
+      pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+      [username, email, hash],
+      (err, result) => {
+        console.log(`hash now is ${hash}`)
+        console.log(`error is ${err}`)
+        console.log(`result is ${result}`)
+      }
+      );
+    });
+  })
 })
 
 // app.get('/login', (req, res) => {
