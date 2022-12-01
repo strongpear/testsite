@@ -96,6 +96,7 @@ app.post('/register', (req, res) => {
   const email = req.body.email
   const password = req.body.password
   bcrypt.genSalt(10, (err, salt) => {
+    console.log(`salt is ${salt}`)
     bcrypt.hash(password, salt, function(err, hash) {
     //bcrypt.hash(password, saltRounds, (err, hash) => {
       if (err) {
