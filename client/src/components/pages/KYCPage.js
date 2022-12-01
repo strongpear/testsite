@@ -5,6 +5,8 @@ import Axios from 'axios'
 
 import '../../App.css'
 
+Axios.defaults.withCredentials = true
+
 export default function KYCPage() {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');

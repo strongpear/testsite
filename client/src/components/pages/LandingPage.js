@@ -2,9 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
+import Axios from 'axios';
 
 import '../../App.css'
 import BackgroundImage from '../../assets/images/bg.png'
+
+Axios.defaults.withCredentials = true
 
 export default function LandingPage() {
     const [user, setUser] = useState({});

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
+Axios.defaults.withCredentials = true
 import '../../App.css'
 
 export default function PaymentPage() {

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import Axios from 'axios'
 import '../../App.css'
+Axios.defaults.withCredentials = true
 
 export default function ForgetPasswordPage() {
     return (
