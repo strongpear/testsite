@@ -207,9 +207,9 @@ app.post('/login', (req, res) => {
   pool.query(
       
       "SELECT * FROM info WHERE username = $1",
-      [username, hash],
+      [username, password],
       (err, result) => {
-        bcrypt.compare(plaintextPassword, hash, function(err, result) {
+        bcrypt.compare(plaintextPassword, password, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
           if (err) {
