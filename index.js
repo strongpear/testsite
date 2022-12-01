@@ -209,10 +209,12 @@ app.post('/login', (req, res) => {
       "SELECT * FROM info WHERE username = $1",
       [username],
       (err, result) => {
+        
         console.log(`result is ${result}`)
-        console.log(`result[0] is ${result[0]}`)
-        console.log(`result[0].password is ${result[0].password}`)
-        bcrypt.compare(plaintextPassword, result[0].password, function(err, result) {
+        console.log(`result.rows is ${result.rows}`)
+        console.log(`result.rows[0] is ${result.rows[0]}`)
+        console.log(`result.rows[0].password is ${result.rows[0].password}`)
+        bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
           if (err) {
