@@ -158,36 +158,39 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const passwords = req.body.password;
-  bcrypt.hash(passwords, saltRounds, (err, hash) => {
-    if (err) {
-      console.log(err);
-    }
-    pool.query(
-        
-        "SELECT * FROM info WHERE username = $1 AND password = $2",
-        [username, hash],
-        (err, result) => {
-            console.log(`error is ${err}`)
-            console.log(`result is ${result}`)
-            console.log(`hash is ${hash}`)
-            if (err) {
-                res.send({err: err}); //if error, next wont run
-            }
-            // If we have found someone with that username/pass combo
-            if (result.rows.length > 0) {
-                req.session.user = result;
-                console.log(req.session.user);
-                //console.log(result)
-                console.log("success")
-                res.send(result)
-            }
-            else {
-                console.log("failed")
-                res.send({message: "Invalid Credentials."})
-            }
-        }
-    )
-  });
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    bcrypt.hash(password, salt, function(err, hash) {
+    //bcrypt.hash(passwords, saltRounds, (err, hash) => {
+      if (err) {
+        console.log(err);
+      }
+      pool.query(
+          
+          "SELECT * FROM info WHERE username = $1 AND password = $2",
+          [username, hash],
+          (err, result) => {
+              console.log(`error is ${err}`)
+              console.log(`result is ${result}`)
+              console.log(`hash is ${hash}`)
+              if (err) {
+                  res.send({err: err}); //if error, next wont run
+              }
+              // If we have found someone with that username/pass combo
+              if (result.rows.length > 0) {
+                  req.session.user = result;
+                  console.log(req.session.user);
+                  //console.log(result)
+                  console.log("success")
+                  res.send(result)
+              }
+              else {
+                  console.log("failed")
+                  res.send({message: "Invalid Credentials."})
+              }
+          }
+      )
+    });
+  })
 })
 
 app.post('/logout', (req, res) => {
