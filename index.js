@@ -203,13 +203,15 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const plaintextPassword = req.body.password;
-  
+
   pool.query(
       
       "SELECT * FROM info WHERE username = $1",
-      [username, password],
+      [username],
       (err, result) => {
-        bcrypt.compare(plaintextPassword, password, function(err, result) {
+        console.log(`result is ${result}`)
+        console.log(`result[0] is ${result[0]}`)
+        bcrypt.compare(plaintextPassword, result[0].password, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
           if (err) {
