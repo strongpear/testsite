@@ -211,6 +211,7 @@ app.post('/login', (req, res) => {
       (err, result) => {
         console.log(`result is ${result}`)
         console.log(`result.rows is ${result.rows}`)
+        console.log(`result.rows[password] is ${result.rows[password]}`)
         bcrypt.compare(plaintextPassword, result.rows, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
