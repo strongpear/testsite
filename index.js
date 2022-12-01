@@ -95,7 +95,7 @@ app.post('/register', (req, res) => {
   const username = req.body.username
   const email = req.body.email
   const password = req.body.password
-  bcrypt.genSalt(saltRounds, (err, salt) => {
+  bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(password, salt, function(err, hash) {
     //bcrypt.hash(password, saltRounds, (err, hash) => {
       if (err) {
@@ -104,6 +104,8 @@ app.post('/register', (req, res) => {
       pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
       [username, email, hash],
       (err, result) => {
+        console.log(`register page`);
+        console.log(`salt now is ${salt}`);
         console.log(`hash now is ${hash}`)
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
@@ -158,7 +160,7 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const passwords = req.body.password;
-  bcrypt.genSalt(saltRounds, (err, salt) => {
+  bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(password, salt, function(err, hash) {
     //bcrypt.hash(passwords, saltRounds, (err, hash) => {
       if (err) {
@@ -169,6 +171,7 @@ app.post('/login', (req, res) => {
           "SELECT * FROM info WHERE username = $1 AND password = $2",
           [username, hash],
           (err, result) => {
+              console.log(`login page`)
               console.log(`error is ${err}`)
               console.log(`result is ${result}`)
               console.log(`hash is ${hash}`)
