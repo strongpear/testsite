@@ -93,6 +93,17 @@ app.post('/send', (req, res) => {
     const sender = req.session.user
     const receiver = req.body.receiver
     const amount = req.body.amount
+
+    console.log("updating receiver amount")
+    // Increase receiver amount
+    pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
+    [amount, receiver],
+    (err, result) => {
+      console.log(`error is ${err}`)
+      console.log(`result is ${result}`)
+    })
+    console.log(sender)
+    console.log("updating sender amount")
     
     // Decrease sender amount
     pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
@@ -101,14 +112,7 @@ app.post('/send', (req, res) => {
       console.log(`error is ${err}`)
       console.log(`result is ${result}`)
     })
-    
-    // Increase receiver amount
-    pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
-    [amount, receiver],
-    (err, result) => {
-      console.log(`error is ${err}`)
-      console.log(`result is ${result}`)
-    })
+
 })
 
 // app.get('/login', (req, res) => {
