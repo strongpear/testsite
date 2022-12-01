@@ -116,6 +116,8 @@ app.post('/register', (req, res) => {
   })
 })
 
+
+
 // app.get('/login', (req, res) => {
 //     if (req.session.user) {
 //       res.send({ loggedIn: true, user: req.session.user });
@@ -158,47 +160,78 @@ app.post('/register', (req, res) => {
 
 // With password hashing
 
+// app.post('/login', (req, res) => {
+//   const username = req.body.username;
+//   const passwords = req.body.password;
+//   bcrypt.genSalt(10, (err, salt) => {
+//     console.log(`salt is ${salt}`)
+//     bcrypt.hash(passwords, salt, function(err, hash) {
+//     //bcrypt.hash(passwords, saltRounds, (err, hash) => {
+//       if (err) {
+//         console.log(err);
+//       }
+//       pool.query(
+          
+//           "SELECT * FROM info WHERE username = $1 AND password = $2",
+//           [username, hash],
+//           (err, result) => {
+//               console.log(`login page`)
+//               console.log(`salt is ${salt}`)
+//               console.log(`error is ${err}`)
+//               console.log(`result is ${result}`)
+//               console.log(`hash is ${hash}`)
+//               if (err) {
+//                   res.send({err: err}); //if error, next wont run
+//               }
+//               // If we have found someone with that username/pass combo
+//               if (result.rows.length > 0) {
+//                   req.session.user = result;
+//                   console.log(req.session.user);
+//                   //console.log(result)
+//                   console.log("success")
+//                   res.send(result)
+//               }
+//               else {
+//                   console.log("failed")
+//                   res.send({message: "Invalid Credentials."})
+//               }
+//           }
+//       )
+//     });
+//   })
+// })
 app.post('/login', (req, res) => {
   const username = req.body.username;
-  const passwords = req.body.password;
-  bcrypt.genSalt(10, (err, salt) => {
-    console.log(`salt is ${salt}`)
-    bcrypt.hash(passwords, salt, function(err, hash) {
-    //bcrypt.hash(passwords, saltRounds, (err, hash) => {
-      if (err) {
-        console.log(err);
-      }
-      pool.query(
-          
-          "SELECT * FROM info WHERE username = $1 AND password = $2",
-          [username, hash],
-          (err, result) => {
-              console.log(`login page`)
-              console.log(`salt is ${salt}`)
-              console.log(`error is ${err}`)
-              console.log(`result is ${result}`)
-              console.log(`hash is ${hash}`)
-              if (err) {
-                  res.send({err: err}); //if error, next wont run
-              }
-              // If we have found someone with that username/pass combo
-              if (result.rows.length > 0) {
-                  req.session.user = result;
-                  console.log(req.session.user);
-                  //console.log(result)
-                  console.log("success")
-                  res.send(result)
-              }
-              else {
-                  console.log("failed")
-                  res.send({message: "Invalid Credentials."})
-              }
+  const plaintextPassword = req.body.password;
+  
+  pool.query(
+      
+      "SELECT * FROM info WHERE username = $1",
+      [username, hash],
+      (err, result) => {
+        bcrypt.compare(plaintextPassword, hash, function(err, result) {
+          console.log(`error is ${err}`)
+          console.log(`result is ${result}`)
+          if (err) {
+              res.send({err: err}); //if error, next wont run
           }
-      )
-    });
-  })
+          // If we have found someone with that username/pass combo
+          if (result) {
+              req.session.user = username;
+              console.log("The login page:")
+              console.log(req.session.user);
+              //console.log(result)
+              console.log("success")
+              res.send(result)
+          }
+          else {
+              console.log("failed")
+              res.send({message: "Invalid Credentials."})
+          }
+      });
+    }
+  )
 })
-
 app.post('/logout', (req, res) => {
   console.log("The logout page:")
   console.log(req.session.user);
