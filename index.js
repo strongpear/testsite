@@ -100,33 +100,53 @@ app.post('/register', (req, res) => {
   const username = req.body.username
   const email = req.body.email
   const password = req.body.password
-  pool.query("SELECT * FROM info WHERE username = $1", [username],
-    (err, result) => {
-      if (result.rows.length >= 1) {
-        console.log(`Duplicate Username`)
-      }
-      else {
-        bcrypt.genSalt(saltRounds, (err, salt) => {
-          console.log(`salt is ${salt}`)
-          bcrypt.hash(password, salt, function(err, hash) {
-          //bcrypt.hash(password, saltRounds, (err, hash) => {
-            if (err) {
-              console.log(err);
-            }
-            pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-            [username, email, hash],
-            (err, result) => {
-              console.log(`register page`);
-              console.log(`salt now is ${salt}`);
-              console.log(`hash now is ${hash}`)
-              console.log(`error is ${err}`)
-              console.log(`result is ${result}`)
-            }
-            );
-          });
-        })
-      }
-    })
+  var valid = true;
+  const regex_email = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
+  const regex_password_username = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
+  console.log(`Before the check valid is ${valid}`)
+  console.log(regex_email.test(emailReg))
+  if(regex_email.test(email)){
+    valid = false;
+    console.log(`Email not inpuuted correctly`)
+  }
+  if(regex_password_username.test(username)){
+    valid = false;
+    console.log(`Username must contain 6 or more characters`)
+  }
+  if(regex_password_username.test(password)){
+    valid = false;
+    console.log(`Password must contain 6 or more characters`)
+  }
+  console.log(`After the check valid is ${valid}`)
+  if(valid){
+    pool.query("SELECT * FROM info WHERE username = $1", [username],
+      (err, result) => {
+        if (result.rows.length >= 1) {
+          console.log(`Duplicate Username`)
+        }
+        else {
+          bcrypt.genSalt(saltRounds, (err, salt) => {
+            console.log(`salt is ${salt}`)
+            bcrypt.hash(password, salt, function(err, hash) {
+            //bcrypt.hash(password, saltRounds, (err, hash) => {
+              if (err) {
+                console.log(err);
+              }
+              pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+              [username, email, hash],
+              (err, result) => {
+                console.log(`register page`);
+                console.log(`salt now is ${salt}`);
+                console.log(`hash now is ${hash}`)
+                console.log(`error is ${err}`)
+                console.log(`result is ${result}`)
+              }
+              );
+            });
+          })
+        }
+      })
+    }
   })
 
   app.post('/send', (req, res) => {
