@@ -194,6 +194,7 @@ app.post('/login', (req, res) => {
             //console.log(result)
             console.log("success")
             res.send(original_result)
+            console.log("Sent result")
           }
         });
           // If we have found someone with that username/pass combo
