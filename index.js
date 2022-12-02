@@ -140,7 +140,7 @@ app.post('/login', (req, res) => {
             }
             // If we have found someone with that username/pass combo
             if (result.rows.length > 0) {
-                req.session.user = result;
+                req.session.user = username;
                 console.log(req.session.user);
                 //console.log(result)
                 console.log("success")
