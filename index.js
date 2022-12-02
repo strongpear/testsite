@@ -205,7 +205,7 @@ app.post('/login', (req, res) => {
               //console.log(req.session.user);
               //console.log(result)
               console.log("success")
-              res.send(original_result)
+              //res.send(original_result)
           }
           else {
               console.log("failed")
