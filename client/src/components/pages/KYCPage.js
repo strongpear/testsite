@@ -21,6 +21,12 @@ export default function KYCPage() {
     const regex_zip = new RegExp('[0-9]{5}')
     const regex_date = new RegExp('(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}');
     console.log(`Before the check valid is ${valid}`)
+    console.log(`Firstname is ${regex_firtname_lastname.test(firstname)}`)
+    console.log(`Lastname is ${regex_firtname_lastname.test(lastname)}`)
+    console.log(`Licence is ${regex_licence.test(driverid)}`)
+    console.log(`State is ${regex_state.test(state)}`)
+    console.log(`Zip is ${regex_zip.test(zip)}`)
+    console.log(`Date is ${regex_date.test(birthdate)}`)
     if(!regex_firtname_lastname.test(firstname)){
         valid = false;
         console.log(`First name must be letters`)
@@ -46,19 +52,19 @@ export default function KYCPage() {
         console.log(`Birth Date must be in form of mm/dd/yyyy`)
     }
     console.log(`After the check valid is ${valid}`)
-    if(valid){
-        Axios.post('/kycform', {
-        firstname: firstname,
-        lastname: lastname,
-        driverid: driverid,
-        state: state,
-        zip: zip,
-        birthdate: birthdate,
-        withCredentials: true
-        }).then((response) => {
-        console.log(response);
-        })
-    }
+    // if(valid){
+    //     Axios.post('/kycform', {
+    //     firstname: firstname,
+    //     lastname: lastname,
+    //     driverid: driverid,
+    //     state: state,
+    //     zip: zip,
+    //     birthdate: birthdate,
+    //     withCredentials: true
+    //     }).then((response) => {
+    //     console.log(response);
+    //     })
+    // }
   }
   
   return (
