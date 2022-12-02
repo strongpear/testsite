@@ -6,13 +6,13 @@ import { Fragment, useEffect, useState } from "react";
 Axios.defaults.withCredentials = true
 
 export default function HomePage() {
-    const [username, setUsername] = useState('')
+    const [username, setUsername] = useState("")
 
     const getUsername = async () => {
         const res = await Axios.post('/home');
         console.log(`This is the front end for the homepage`)
         console.log(res)
-        setUsername(res);
+        setUsername("Example");
         console.log(username)
     }
     useEffect(() => {
@@ -29,9 +29,7 @@ export default function HomePage() {
     var testing = username;
     return (
         <div className="text-center">
-            {username.map(person => (
-            <h1 className="main-title home-page-title">Testing { person.data }</h1>
-            ))}
+            <h1 className="main-title home-page-title">Testing { testing }</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
             </Link>
