@@ -52,19 +52,19 @@ export default function KYCPage() {
         console.log(`Birth Date must be in form of mm/dd/yyyy`)
     }
     console.log(`After the check valid is ${valid}`)
-    // if(valid){
-    //     Axios.post('/kycform', {
-    //     firstname: firstname,
-    //     lastname: lastname,
-    //     driverid: driverid,
-    //     state: state,
-    //     zip: zip,
-    //     birthdate: birthdate,
-    //     withCredentials: true
-    //     }).then((response) => {
-    //     console.log(response);
-    //     })
-    // }
+    if(valid){
+        Axios.post('/kycform', {
+        firstname: firstname,
+        lastname: lastname,
+        driverid: driverid,
+        state: state,
+        zip: zip,
+        birthdate: birthdate,
+        withCredentials: true
+        }).then((response) => {
+        console.log(response);
+        })
+    }
   }
   
   return (
