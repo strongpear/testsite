@@ -15,18 +15,18 @@ export default function KYCPage() {
 
   const kycform = () => {
     var valid = true;
-    const regex_firtname_lastname = new RegExp('[A-Za-z].{0,}');
-    const regex_licence = new RegExp('[0-9]{8}')
-    const regex_state = new RegExp('[A-Za-z]{2}')
-    const regex_zip = new RegExp('[0-9]{5}')
-    const regex_date = new RegExp("(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}");
+    const regex_firtname_lastname = new RegExp("^[a-zA-Z]+$");
+    const regex_licence = new RegExp('^[0-9]{8}$')
+    const regex_state = new RegExp('^[A-Za-z]{2}$')
+    const regex_zip = new RegExp('^[0-9]{5}$')
+    const regex_date = new RegExp("^(0[1-9]|1[0-2])\/([0-2][0-9]|3[01])\/(19|20)[0-9][0-9]$");
     console.log(`Before the check valid is ${valid}`)
     console.log(`Firstname is ${firstname} and ${regex_firtname_lastname.test(firstname)}`)
     console.log(`Lastname is ${lastname} and ${regex_firtname_lastname.test(lastname)}`)
     console.log(`Licence is ${driverid} and ${regex_licence.test(driverid)}`)
     console.log(`State is ${state} and ${regex_state.test(state)}`)
     console.log(`Zip is ${zip} and ${regex_zip.test(zip)}`)
-    console.log(`Date is ${birthdate} and  ${regex_date.test(birthdate)}`)
+    console.log(`Date is ${birthdate} and ${regex_date.test(birthdate)}`)
     if(!regex_firtname_lastname.test(firstname)){
         valid = false;
         console.log(`First name must be letters`)

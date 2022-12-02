@@ -12,8 +12,8 @@ export default function SignUpPage() {
 
   const register = () => {
     var valid = true;
-    const regex_email = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
-    const regex_password_username = new RegExp('.{6,}');
+    const regex_email = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
+    const regex_password_username = new RegExp('^.{6,}$');
     console.log(`Before the check valid is ${valid}`)
     if(!regex_email.test(emailReg)){
         valid = false;
