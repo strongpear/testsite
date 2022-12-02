@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState } from "react";
 Axios.defaults.withCredentials = true
 
 export default function HomePage() {
-    const [username, setUsername] = useState([])
+    const [username, setUsername] = useState('')
 
     const getUsername = async () => {
         const res = await Axios.post('/home');
@@ -24,11 +24,11 @@ export default function HomePage() {
             console.log("logged out")
         })
     }
-    console.log(username)
+    console.log(username)  //username.mpa
     var targetOfGreeting = "world";
     return (
         <div className="text-center">
-            <h1 className="main-title home-page-title">Testing { targetOfGreeting }</h1>
+            <h1 className="main-title home-page-title">Testing { username }</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
             </Link>

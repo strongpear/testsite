@@ -127,7 +127,9 @@ app.post('/register', (req, res) => {
 //   }); 
 
 // Function to authenticate user
-app.post('/login', (req, res) => {
+
+
+ app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     
@@ -171,21 +173,21 @@ app.post('/login', (req, res) => {
 //       (err, result) => {
 
 //         original_result = result;
-//         console.log(`result is ${result}`)
-//         console.log(`result.rows is ${result.rows}`)
-//         console.log(`result.rows[0] is ${result.rows[0]}`)
-//         console.log(`result.rows[0].password is ${result.rows[0].password}`)
+//         // console.log(`result is ${result}`)
+//         // console.log(`result.rows is ${result.rows}`)
+//         // console.log(`result.rows[0] is ${result.rows[0]}`)
+//         // console.log(`result.rows[0].password is ${result.rows[0].password}`)
 //         bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, result) {
-//           console.log(`error is ${err}`)
-//           console.log(`result is ${result}`)
+//           // console.log(`error is ${err}`)
+//           // console.log(`result is ${result}`)
 //           if (err) {
 //               res.send({err: err}); //if error, next wont run
 //           }
 //           // If we have found someone with that username/pass combo
 //           if (result) {
 //               req.session.user = username;
-//               console.log("The login page:")
-//               console.log(req.session.user);
+//               //console.log("The login page:")
+//               //console.log(req.session.user);
 //               //console.log(result)
 //               console.log("success")
 //               res.send(original_result)
