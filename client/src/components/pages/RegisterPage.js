@@ -11,16 +11,26 @@ export default function SignUpPage() {
   const [passwordReg, setPasswordReg] = useState('');
 
   const register = () => {
-    Axios.post('/register', {
-      username: usernameReg,
-      email: emailReg, 
-      password: passwordReg,
-      withCredentials: true
-    }).then((response) => {
-      console.log(response);
-    })
+    valid = true;
+    const regex_email = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
+    console.log(`Before the check valid is ${valid}`)
+    console.log(regex_email.test(emailReg))
+    if(regex_email.test(emailReg)){
+        valid = false;
+    }
+    console.log(`After the check valid is ${valid}`)
+    if(valid){
+        Axios.post('/register', {
+        username: usernameReg,
+        email: emailReg, 
+        password: passwordReg,
+        withCredentials: true
+        }).then((response) => {
+        console.log(response);
+        })
+    }
   }
-  
+
   return (
     <div className="text-center m-5-auto">
         <h2>Join us</h2>
