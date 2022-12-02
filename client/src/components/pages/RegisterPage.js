@@ -14,7 +14,8 @@ export default function SignUpPage() {
     Axios.post('/register', {
       username: usernameReg,
       email: emailReg, 
-      password: passwordReg
+      password: passwordReg,
+      withCredentials: true
     }).then((response) => {
       console.log(response);
     })

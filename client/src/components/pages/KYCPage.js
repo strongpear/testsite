@@ -20,7 +20,8 @@ export default function KYCPage() {
       driverid: driverid,
       state: state,
       zip: zip,
-      birthdate: birthdate
+      birthdate: birthdate,
+      withCredentials: true
     }).then((response) => {
       console.log(response);
     })
