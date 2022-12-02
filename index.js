@@ -173,6 +173,7 @@ app.post('/login', (req, res) => {
       (err, result) => {
 
         original_result = result;
+        comparison = false;
         // console.log(`result is ${result}`)
         // console.log(`result.rows is ${result.rows}`)
         // console.log(`result.rows[0] is ${result.rows[0]}`)
@@ -183,8 +184,10 @@ app.post('/login', (req, res) => {
           if (err) {
               res.send({err: err}); //if error, next wont run
           }
+          comparison = result;
+        });
           // If we have found someone with that username/pass combo
-          if (result) {
+          if (comparison) {
               req.session.user = username;
               //console.log("The login page:")
               //console.log(req.session.user);
@@ -196,7 +199,7 @@ app.post('/login', (req, res) => {
               console.log("failed")
               res.send({message: "Invalid Credentials."})
           }
-      });
+
     }
   )
 })
