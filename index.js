@@ -186,7 +186,7 @@ app.post('/login', (req, res) => {
           }
           console.log("The result of the comparison: ")
           console.log(result)
-          comparison = result;
+          comparison = true;
         });
           // If we have found someone with that username/pass combo
           console.log("comparison now")
