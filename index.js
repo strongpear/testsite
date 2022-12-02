@@ -205,7 +205,7 @@ app.post('/logout', (req, res) => {
   console.log(req.session.user);
   //delete req.session.user;
   req.session.user = '';
-  console.log(Set session to an empty string);
+  console.log("Set session to an empty string");
   console.log(req.session.user);
 })
 
