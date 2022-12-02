@@ -141,34 +141,37 @@ app.post('/register', (req, res) => {
       }
       else{
         pool.query("SELECT * FROM info WHERE username = $1", [sender],
-        (err, result) => {
-        if(result.rows[0].balance < amount){
-        console.log(`Sender ${sender} Does not have enough money`)
-        }
-        else{
-          console.log("updating receiver amount")
-          // Increase receiver amount
-          pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
-          [amount, receiver],
-          (err, result) => {
-            console.log(`error is ${err}`)
-            console.log(`result is ${result}`)
-          })
-          console.log("logged in user is " + sender)
-          console.log("updating sender amount")
+        (err, senderresult) => {
+          console.log(senderresult);
+          console.log(senderresult.rows[0]);
+          console.log(senderresult.rows[0].balance);
+          if(senderresult.rows[0].balance < amount){
+          console.log(`Sender ${sender} Does not have enough money`)
+          }
+          else{
+            console.log("updating receiver amount")
+            // Increase receiver amount
+            pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
+            [amount, receiver],
+            (err, result) => {
+              console.log(`error is ${err}`)
+              console.log(`result is ${result}`)
+            })
+            console.log("logged in user is " + sender)
+            console.log("updating sender amount")
 
-          // Decrease sender amount
-          pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
-          [amount, sender],
-          (err, result) => {
-            console.log(`error is ${err}`)
-            console.log(`result is ${result}`)
-          })
-        }
-      })
-    }
+            // Decrease sender amount
+            pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
+            [amount, sender],
+            (err, result) => {
+              console.log(`error is ${err}`)
+              console.log(`result is ${result}`)
+            })
+          }
+        })
+      }
+    })
   })
-})
 
 // app.get('/login', (req, res) => {
 //     if (req.session.user) {
