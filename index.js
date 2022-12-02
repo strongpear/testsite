@@ -184,9 +184,11 @@ app.post('/login', (req, res) => {
           if (err) {
               res.send({err: err}); //if error, next wont run
           }
+          console.log(result)
           comparison = result;
         });
           // If we have found someone with that username/pass combo
+          console.log(comparison)
           if (comparison) {
               req.session.user = username;
               //console.log("The login page:")
