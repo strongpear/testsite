@@ -16,15 +16,15 @@ export default function SignUpPage() {
     const regex_password_username = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
     console.log(`Before the check valid is ${valid}`)
     console.log(regex_email.test(emailReg))
-    if(regex_email.test(emailReg)){
+    if(!regex_email.test(emailReg)){
         valid = false;
-        console.log(`Email not inpuuted correctly`)
+        console.log(`Email not inputed correctly`)
     }
-    if(regex_password_username.test(usernameReg)){
+    if(!regex_password_username.test(usernameReg)){
         valid = false;
         console.log(`Username must contain 6 or more characters`)
     }
-    if(regex_password_username.test(passwordReg)){
+    if(!regex_password_username.test(passwordReg)){
         valid = false;
         console.log(`Password must contain 6 or more characters`)
     }

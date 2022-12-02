@@ -104,16 +104,16 @@ app.post('/register', (req, res) => {
   const regex_email = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
   const regex_password_username = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
   console.log(`Before the check valid is ${valid}`)
-  console.log(regex_email.test(emailReg))
-  if(regex_email.test(email)){
+  console.log(regex_email.test(email))
+  if(!regex_email.test(email)){
     valid = false;
     console.log(`Email not inpuuted correctly`)
   }
-  if(regex_password_username.test(username)){
+  if(!regex_password_username.test(username)){
     valid = false;
     console.log(`Username must contain 6 or more characters`)
   }
-  if(regex_password_username.test(password)){
+  if(!regex_password_username.test(password)){
     valid = false;
     console.log(`Password must contain 6 or more characters`)
   }
