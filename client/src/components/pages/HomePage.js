@@ -12,7 +12,9 @@ export default function HomePage() {
         const res = await Axios.post('/home');
         console.log(`This is the front end for the homepage`)
         console.log(res)
-        setUsername("Example");
+        console.log(res.data)
+        console.log(res)
+        setUsername(res);
         console.log(username)
     }
     useEffect(() => {
