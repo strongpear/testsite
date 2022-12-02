@@ -17,7 +17,7 @@ export default function HomePage() {
     }
     useEffect(() => {
         getUsername();
-    }, []);
+    });
 
     const logOut = () => {
         Axios.post('/logout').then((response) => {
