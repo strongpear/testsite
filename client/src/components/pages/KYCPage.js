@@ -14,17 +14,52 @@ export default function KYCPage() {
   const [birthdate, setBirthDate] = useState('');
 
   const kycform = () => {
-    Axios.post('/kycform', {
-      firstname: firstname,
-      lastname: lastname,
-      driverid: driverid,
-      state: state,
-      zip: zip,
-      birthdate: birthdate,
-      withCredentials: true
-    }).then((response) => {
-      console.log(response);
-    })
+    var valid = true;
+    const regex_firtname_lastname = new RegExp('[A-Za-z].{0,}');
+    const regex_licence = new RegExp('[0-9]{8}')
+    const regex_state = new RegExp('[A-Za-z]{2}')
+    const regex_zip = new RegExp('[0-9]{5}')
+    const regex_date = new RegExp('(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}');
+    console.log(`Before the check valid is ${valid}`)
+    console.log(regex_email.test(emailReg))
+    if(!regex_firtname_lastname.test(firstname)){
+        valid = false;
+        console.log(`First name must be letters`)
+    }
+    if(!regex_firtname_lastname.test(lastname)){
+        valid = false;
+        console.log(`Last name must be letters`)
+    }
+    if(!regex_licence.test(driverid)){
+        valid = false;
+        console.log(`Driver License ID must contain 8 digits`)
+    }
+    if(!regex_state.test(state)){
+        valid = false;
+        console.log(`State must contain 2 letters`)
+    }
+    if(!regex_zip.test(zip)){
+        valid = false;
+        console.log(`Zipcode must contain 5 digits`)
+    }
+    if(!regex_date.test(birthdate)){
+        valid = false;
+        console.log(`Birth Date must be in form of mm/dd/yyyy`)
+    }
+    console.log(`After the check valid is ${valid}`)
+    if(valid){
+        Axios.post('/kycform', {
+        firstname: firstname,
+        lastname: lastname,
+        driverid: driverid,
+        state: state,
+        zip: zip,
+        birthdate: birthdate,
+        withCredentials: true
+        }).then((response) => {
+        console.log(response);
+        })
+    }
   }
   
   return (

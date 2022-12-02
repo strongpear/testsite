@@ -100,25 +100,25 @@ app.post('/register', (req, res) => {
   const username = req.body.username
   const email = req.body.email
   const password = req.body.password
-  var valid = true;
-  const regex_email = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
-  const regex_password_username = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
-  console.log(`Before the check valid is ${valid}`)
-  console.log(regex_email.test(email))
-  if(!regex_email.test(email)){
-    valid = false;
-    console.log(`Email not inpuuted correctly`)
-  }
-  if(!regex_password_username.test(username)){
-    valid = false;
-    console.log(`Username must contain 6 or more characters`)
-  }
-  if(!regex_password_username.test(password)){
-    valid = false;
-    console.log(`Password must contain 6 or more characters`)
-  }
-  console.log(`After the check valid is ${valid}`)
-  if(valid){
+  // var valid = true;
+  // const regex_email = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
+  // const regex_password_username = new RegExp('.{6,}');
+  // console.log(`Before the check valid is ${valid}`)
+  // console.log(regex_email.test(email))
+  // if(!regex_email.test(email)){
+  //   valid = false;
+  //   console.log(`Email not inpuuted correctly`)
+  // }
+  // if(!regex_password_username.test(username)){
+  //   valid = false;
+  //   console.log(`Username must contain 6 or more characters`)
+  // }
+  // if(!regex_password_username.test(password)){
+  //   valid = false;
+  //   console.log(`Password must contain 6 or more characters`)
+  // }
+  // console.log(`After the check valid is ${valid}`)
+  // if(valid){
     pool.query("SELECT * FROM info WHERE username = $1", [username],
       (err, result) => {
         if (result.rows.length >= 1) {
@@ -146,7 +146,7 @@ app.post('/register', (req, res) => {
           })
         }
       })
-    }
+  //  }
   })
 
   app.post('/send', (req, res) => {
