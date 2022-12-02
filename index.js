@@ -106,7 +106,7 @@ app.post('/register', (req, res) => {
         console.log(`Duplicate Username`)
       }
       else {
-        bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
           console.log(`salt is ${salt}`)
           bcrypt.hash(password, salt, function(err, hash) {
           //bcrypt.hash(password, saltRounds, (err, hash) => {
@@ -127,9 +127,33 @@ app.post('/register', (req, res) => {
         })
       }
     })
-  }
+  })
 
+  app.post('/send', (req, res) => {
+    const sender = req.session.user
+    const receiver = req.body.receiver
+    const amount = req.body.amount
 
+    console.log("updating receiver amount")
+    // Increase receiver amount
+    pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
+    [amount, receiver],
+    (err, result) => {
+      console.log(`error is ${err}`)
+      console.log(`result is ${result}`)
+    })
+    console.log("logged in user is " + sender)
+    console.log("updating sender amount")
+
+    // Decrease sender amount
+    pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
+    [amount, sender],
+    (err, result) => {
+      console.log(`error is ${err}`)
+      console.log(`result is ${result}`)
+    })
+
+})
 
 // app.get('/login', (req, res) => {
 //     if (req.session.user) {
