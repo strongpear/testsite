@@ -19,7 +19,10 @@ export default function HomePage() {
     });
 
     const logOut = () => {
-        Axios.post('/logout').then((response) => {
+        Axios.post('/logout',
+        {
+            withCredentials: true
+        }).then((response) => {
             console.log("logged out")
         })
     }
