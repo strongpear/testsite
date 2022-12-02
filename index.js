@@ -161,7 +161,7 @@ app.post('/register', (req, res) => {
 //  })
 
 // With password hashing
-comparison;
+comparison = false;
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const plaintextPassword = req.body.password;
