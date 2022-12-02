@@ -26,7 +26,7 @@ export default function KYCPage() {
     console.log(`Licence is ${driverid} and ${regex_licence.test(driverid)}`)
     console.log(`State is ${state} and ${regex_state.test(state)}`)
     console.log(`Zip is ${zip} and ${regex_zip.test(zip)}`)
-    console.log(`Date is${birthdate} and  ${regex_date.test(birthdate)}`)
+    console.log(`Date is ${birthdate} and  ${regex_date.test(birthdate)}`)
     if(!regex_firtname_lastname.test(firstname)){
         valid = false;
         console.log(`First name must be letters`)
