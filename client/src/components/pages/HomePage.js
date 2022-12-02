@@ -26,9 +26,10 @@ export default function HomePage() {
     }
     console.log(username)  //username.mpa
     var targetOfGreeting = "world";
+    var testing = username;
     return (
         <div className="text-center">
-            <h1 className="main-title home-page-title">Testing { username }</h1>
+            <h1 className="main-title home-page-title">Testing { testing }</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
             </Link>
