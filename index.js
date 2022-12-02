@@ -178,14 +178,15 @@ app.post('/login', (req, res) => {
         // console.log(`result.rows[0] is ${result.rows[0]}`)
         // console.log(`result.rows[0].password is ${result.rows[0].password}`)
         bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, result) {
-          // console.log(`error is ${err}`)
-          // console.log(`result is ${result}`)
+          console.log(`error is ${err}`)
+          console.log(`result is ${result}`)
           if (err) {
               res.send({err: err}); //if error, next wont run
           }
           comparison = result;
         });
           // If we have found someone with that username/pass combo
+          console.log(`comparison is ${comparison}`)
           if (comparison) {
               req.session.user = username;
               //console.log("The login page:")
