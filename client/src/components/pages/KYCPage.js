@@ -21,7 +21,6 @@ export default function KYCPage() {
     const regex_zip = new RegExp('[0-9]{5}')
     const regex_date = new RegExp('(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}');
     console.log(`Before the check valid is ${valid}`)
-    console.log(regex_email.test(emailReg))
     if(!regex_firtname_lastname.test(firstname)){
         valid = false;
         console.log(`First name must be letters`)
