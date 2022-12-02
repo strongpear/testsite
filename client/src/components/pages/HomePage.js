@@ -29,7 +29,7 @@ export default function HomePage() {
     var testing = username;
     return (
         <div className="text-center">
-            <h1 className="main-title home-page-title">Testing { testing }</h1>
+            <h1 className="main-title home-page-title">{ testing }</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
             </Link>
