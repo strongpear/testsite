@@ -173,7 +173,7 @@ app.post('/login', (req, res) => {
       (err, result) => {
 
         original_result = result;
-        comparison = false;
+        var comparison;
         // console.log(`result is ${result}`)
         // console.log(`result.rows is ${result.rows}`)
         // console.log(`result.rows[0] is ${result.rows[0]}`)
