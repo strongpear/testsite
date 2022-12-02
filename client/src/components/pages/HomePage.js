@@ -21,7 +21,7 @@ export default function HomePage() {
     const logOut = () => {
         Axios.post('/logout',
         {
-            withCredentials: false
+            withCredentials: true
         }).then((response) => {
             console.log("logged out")
         })
