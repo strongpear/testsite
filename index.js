@@ -187,7 +187,7 @@ app.post('/login', (req, res) => {
           console.log("The result of the comparison: ")
           console.log(results)
           comparison = results;
-          if (comparison) {
+          if (results) {
             req.session.user = username;
             //console.log("The login page:")
             //console.log(req.session.user);
@@ -209,7 +209,7 @@ app.post('/login', (req, res) => {
           }
           else {
               console.log("failed")
-              res.send({message: "Invalid Credentials."})
+              //res.send({message: "Invalid Credentials."})
           }
 
     }
