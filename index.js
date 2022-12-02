@@ -204,7 +204,12 @@ app.post('/logout', (req, res) => {
   console.log("The logout page:")
   console.log(req.session.user);
   //delete req.session.user;
-  req.session.user = '';
+  //req.session.user = '';
+  req.session.destroy((error)=>{
+    if(error){
+      console.log(error);
+    }
+  });
   console.log("Set session to an empty string");
   console.log(req.session.user);
 })
