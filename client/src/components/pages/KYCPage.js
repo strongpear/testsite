@@ -19,7 +19,7 @@ export default function KYCPage() {
     const regex_licence = new RegExp('[0-9]{8}')
     const regex_state = new RegExp('[A-Za-z]{2}')
     const regex_zip = new RegExp('[0-9]{5}')
-    const regex_date = new RegExp('(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}');
+    const regex_date = new RegExp("(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}");
     console.log(`Before the check valid is ${valid}`)
     console.log(`Firstname is ${firstname} and ${regex_firtname_lastname.test(firstname)}`)
     console.log(`Lastname is ${lastname} and ${regex_firtname_lastname.test(lastname)}`)
