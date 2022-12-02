@@ -19,10 +19,7 @@ export default function HomePage() {
     });
 
     const logOut = () => {
-        Axios.post('/logout',
-        {
-            withCredentials: true
-        }).then((response) => {
+        Axios.post('/logout', {withCredentials: true}).then((response) => {
             console.log("logged out")
         })
     }
@@ -32,6 +29,10 @@ export default function HomePage() {
             <h1 className="main-title home-page-title">{username}</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
+            </Link>
+
+            <Link to="/payment">
+                <button className="primary-button">Pay</button>
             </Link>
 
             <Link to="/">

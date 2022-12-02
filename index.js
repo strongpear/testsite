@@ -34,7 +34,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 4,
+      expires: 60 * 60 * 24,
     },
   })
 );
@@ -74,18 +74,23 @@ const pool = new Pool({
 // Function to register the user
 // app.post('/register', (req, res) => {
 
-//     const username = req.body.username
-//     const email = req.body.email
-//     const password = req.body.password
-//     pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-//     [username, email, password],
-//     (err, result) => {
+//   const username = req.body.username
+//   const email = req.body.email
+//   const password = req.body.password
+//   pool.query("SELECT * FROM info WHERE username = $1", [username],
+//   (err, result) => {
+//     if (result.rows.length >= 1) {
+//       console.log(`Duplicate Username`)
+//     }
+//     else {
+//       pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+//       [username, email, password],
+//       (err, result) => {
 //         console.log(`error is ${err}`)
 //         console.log(`result is ${result}`)
-//         console.log("The register page:")
-//         console.log(req.session.user);
-//       }
-//     );
+//       });
+//     }
+//   });
 // })
 
 // WIth password Hashing
@@ -95,26 +100,34 @@ app.post('/register', (req, res) => {
   const username = req.body.username
   const email = req.body.email
   const password = req.body.password
-  bcrypt.genSalt(10, (err, salt) => {
-    console.log(`salt is ${salt}`)
-    bcrypt.hash(password, salt, function(err, hash) {
-    //bcrypt.hash(password, saltRounds, (err, hash) => {
-      if (err) {
-        console.log(err);
+  pool.query("SELECT * FROM info WHERE username = $1", [username],
+    (err, result) => {
+      if (result.rows.length >= 1) {
+        console.log(`Duplicate Username`)
       }
-      pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
-      [username, email, hash],
-      (err, result) => {
-        console.log(`register page`);
-        console.log(`salt now is ${salt}`);
-        console.log(`hash now is ${hash}`)
-        console.log(`error is ${err}`)
-        console.log(`result is ${result}`)
+      else {
+        bcrypt.genSalt(10, (err, salt) => {
+          console.log(`salt is ${salt}`)
+          bcrypt.hash(password, salt, function(err, hash) {
+          //bcrypt.hash(password, saltRounds, (err, hash) => {
+            if (err) {
+              console.log(err);
+            }
+            pool.query("INSERT INTO info (username, email, password) VALUES ($1, $2, $3)",
+            [username, email, hash],
+            (err, result) => {
+              console.log(`register page`);
+              console.log(`salt now is ${salt}`);
+              console.log(`hash now is ${hash}`)
+              console.log(`error is ${err}`)
+              console.log(`result is ${result}`)
+            }
+            );
+          });
+        })
       }
-      );
-    });
-  })
-})
+    })
+  }
 
 
 
