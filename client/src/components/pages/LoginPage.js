@@ -44,6 +44,7 @@ export default function SignInPage() {
         Axios.post('/login', {
         username: username,
         password: password,
+        withCredentials: true
         }).then((response) => {
             console.log(response)
             console.log("hello")

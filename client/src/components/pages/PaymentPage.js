@@ -16,7 +16,8 @@ export default function PaymentPage() {
     Axios.post('/send', {
       receiver: receiver,
       amount: amount,
-      message: message
+      message: message,
+      withCredentials: true
     }).then((response) => {
       console.log(response);
     })

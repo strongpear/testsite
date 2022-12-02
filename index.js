@@ -30,7 +30,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 4,
+      expires: 60 * 60 * 24,
     },
   })
 );
@@ -102,9 +102,9 @@ app.post('/send', (req, res) => {
       console.log(`error is ${err}`)
       console.log(`result is ${result}`)
     })
-    console.log(sender)
+    console.log("logged in user is " + sender)
     console.log("updating sender amount")
-    
+
     // Decrease sender amount
     pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
     [amount, sender],

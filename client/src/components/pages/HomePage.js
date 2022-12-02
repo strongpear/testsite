@@ -7,7 +7,7 @@ Axios.defaults.withCredentials = true
 export default function HomePage() {
 
     const logOut = () => {
-        Axios.post('/logout').then((response) => {
+        Axios.post('/logout', {withCredentials: true}).then((response) => {
             console.log("logged out")
         })
     }
@@ -21,7 +21,7 @@ export default function HomePage() {
             <Link to="/payment">
                 <button className="primary-button">Pay</button>
             </Link>
-            
+
             <Link to="/">
                 <button className="primary-button" onClick={ logOut }>Log out</button>
             </Link>
