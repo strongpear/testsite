@@ -161,7 +161,7 @@ app.post('/register', (req, res) => {
 //  })
 
 // With password hashing
-
+comparison;
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const plaintextPassword = req.body.password;
@@ -173,44 +173,30 @@ app.post('/login', (req, res) => {
       (err, result) => {
 
         original_result = result;
-        var comparison;
         // console.log(`result is ${result}`)
         // console.log(`result.rows is ${result.rows}`)
         // console.log(`result.rows[0] is ${result.rows[0]}`)
         // console.log(`result.rows[0].password is ${result.rows[0].password}`)
-        bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, results) {
+        bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, result) {
           // console.log(`error is ${err}`)
           // console.log(`result is ${result}`)
           if (err) {
               res.send({err: err}); //if error, next wont run
           }
-          console.log("The result of the comparison: ")
-          console.log(results)
-          comparison = results;
-          if (results) {
-            req.session.user = username;
-            //console.log("The login page:")
-            //console.log(req.session.user);
-            //console.log(result)
-            console.log("success")
-            res.send(original_result)
-            console.log("Sent result")
-          }
+          comparison = result;
         });
           // If we have found someone with that username/pass combo
-          console.log("comparison now")
-          console.log(comparison)
           if (comparison) {
               req.session.user = username;
               //console.log("The login page:")
               //console.log(req.session.user);
               //console.log(result)
               console.log("success")
-              //res.send(original_result)
+              res.send(original_result)
           }
           else {
               console.log("failed")
-              //res.send({message: "Invalid Credentials."})
+              res.send({message: "Invalid Credentials."})
           }
 
     }
