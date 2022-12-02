@@ -11,11 +11,8 @@ export default function HomePage() {
     const getUsername = async () => {
         const res = await Axios.post('/home');
         console.log(`This is the front end for the homepage`)
-        console.log(res)
         console.log(res.data)
-        console.log(res)
         setUsername(res.data);
-        console.log(username)
     }
     useEffect(() => {
         getUsername();
@@ -27,11 +24,9 @@ export default function HomePage() {
         })
     }
     console.log(username)  //username.mpa
-    var targetOfGreeting = "world";
-    var testing = username;
     return (
         <div className="text-center">
-            <h1 className="main-title home-page-title">{ testing }</h1>
+            <h1 className="main-title home-page-title">{username}</h1>
             <Link to="/kyc">
                 <button className="primary-button">KYC Details</button>
             </Link>
