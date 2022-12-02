@@ -203,7 +203,8 @@ app.post('/register', (req, res) => {
 app.post('/logout', (req, res) => {
   console.log("The logout page:")
   console.log(req.session.user);
-  delete req.session.user;
+  //delete req.session.user;
+  req.session.user = '';
   console.log(req.session.user);
 })
 
@@ -231,7 +232,7 @@ app.post('/home', (req, res) => {
     res.send(`Welcome ${req.session.user}`);
   }
   else{
-    res.send("Welcome to Jaspal's app. No user signed in.");
+    res.send("Welcome to our app. No user signed in.");
   }
 })
 /*
