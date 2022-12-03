@@ -16,9 +16,9 @@ Deployment for this project is done via Heroku app, which can be found at https:
 
 - Frontend: React
 
-- Database: PostgreSQL
-
-- Storage: Amazon S3
+- Database: 
+  * PostgreSQL for localhost
+  * Heroku database for deployment
 
 
 ## Installation Commands
