@@ -16,8 +16,6 @@ Deployment for this project is done via Heroku app, which can be found at https:
 
 - Frontend: React
 
-- Editor: XCode
-
 - Database: PostgreSQL
 
 - Storage: Amazon S3
