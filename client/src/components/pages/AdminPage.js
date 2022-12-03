@@ -10,7 +10,7 @@ export default function AdminPage() {
 
     const getKYC = async () => {
         //const res = await Axios.get('/admin');
-        const res = await Axios.post('/admin');
+        const res = await Axios.post('/admin', {withCredentials: true});
         console.log(res)
         if (res.data.rows) {
             setKYC(res.data.rows);

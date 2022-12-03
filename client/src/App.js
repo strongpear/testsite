@@ -10,6 +10,7 @@ import ForgetPasswordPage from './components/pages/ForgetPasswordPage'
 import HomePage from './components/pages/HomePage'
 import KYCPage from './components/pages/KYCPage'
 import AdminPage from './components/pages/AdminPage'
+import PaymentPage from './components/pages/PaymentPage'
 
 import './App.css'
 
@@ -28,8 +29,10 @@ export default function App() {
                     <Route path="/home" component={ HomePage } />
                     <Route path="/kyc" component={ KYCPage } />
                     <Route path="/admin" component={ AdminPage } />
+                    <Route path="/payment" component={ PaymentPage } />
                 </Switch>
             </div>
         </Router>
     )
 }
+
