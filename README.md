@@ -21,7 +21,7 @@ Deployment for this project is done via Heroku app, which can be found at https:
   * Heroku database for deployment
 
 
-## Installation Commands
+## Getting Started
 
 In the root folder: 
 ```
