@@ -48,7 +48,7 @@ npm i cors pg express
 
 ## Testing
 
-We are using Selenium and Cucumber to develop our test cases. Installations for Selenium, Cucumber, and ChromeDriver are required. All BDD tests are located in the ***CucumberJava*** and ***cucumberjs*** folders. 
+We are using Selenium and Cucumber to develop our test cases. Installation for Selenium, Cucumber, and ChromeDriver is required. All BDD tests are located in the ***CucumberJava*** and ***cucumberjs*** folders. 
 
 ```
 npm install selenium-webdriver
