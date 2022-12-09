@@ -37,7 +37,7 @@ export default function PaymentPage() {
                     />
                 </p>
                 <p>
-                    <label>Amount</label><br/>
+                    <label>Amount($)</label><br/>
                     <input 
                         type="number"
                         min="0.01"
@@ -47,7 +47,7 @@ export default function PaymentPage() {
                     />
                 </p>
                 <p>
-                    <label>Message</label><br/>
+                    <label>Message(optional)</label><br/>
                     <input 
                         type="text"
                         id="message"
