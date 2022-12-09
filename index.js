@@ -322,7 +322,7 @@ app.post('/home', (req, res) => {
   console.log("The home page:")
   console.log(req.session.user);
   if(req.session.user){
-    pool.query("SELECT * FROM info where username = $1", req.session.user, 
+    pool.query("SELECT * FROM info where username = $1", [req.session.user], 
     (err, result) => {
           if(err) {
               res.send({err: err})
