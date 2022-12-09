@@ -156,7 +156,7 @@ app.post('/register', (req, res) => {
     console.log(`Sending a payment`)
     console.log(`Sender is  ${sender}`)
     console.log(`Reciver is ${receiver}`)
-    console.log(`Amount is ${receiver}`)
+    console.log(`Amount is ${amount}`)
     pool.query("SELECT * FROM info WHERE username = $1", [receiver],
     (err, result) => {
       if (result.rows.length == 0) {
