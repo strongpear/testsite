@@ -159,42 +159,48 @@ app.post('/register', (req, res) => {
     console.log(`Amount is ${amount}`)
     pool.query("SELECT * FROM info WHERE username = $1", [receiver],
     (err, result) => {
-      if (result.rows.length == 0) {
-        console.log(`Reciver ${receiver} Username Does not exist`)
+      if(err) {
+         console.log(`Invalid Transaction attempted!!`)
+         res.send({err: err})
       }
       else{
-        pool.query("SELECT * FROM info WHERE username = $1", [sender],
-        (err, senderresult) => {
-          console.log(`Getting the sender from the Database`)
-          console.log(senderresult);
-          console.log(senderresult.rows[0]);
-          console.log(senderresult.rows[0].balance);
-          if(senderresult.rows[0].balance < amount){
-             console.log(senderresult.rows[0].balance)
-             console.log(amount)
-             console.log(`Sender ${sender} Does not have enough money`)
-          }
-          else{
-            console.log("updating receiver amount")
-            // Increase receiver amount
-            pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
-            [amount, receiver],
-            (err, result) => {
-              console.log(`error is ${err}`)
-              console.log(`result is ${result}`)
-            })
-            console.log("logged in user is " + sender)
-            console.log("updating sender amount")
+        if (result.rows.length == 0) {
+          console.log(`Reciver ${receiver} Username Does not exist`)
+        }
+        else{
+          pool.query("SELECT * FROM info WHERE username = $1", [sender],
+          (err, senderresult) => {
+            console.log(`Getting the sender from the Database`)
+            console.log(senderresult);
+            console.log(senderresult.rows[0]);
+            console.log(senderresult.rows[0].balance);
+            if(senderresult.rows[0].balance < amount){
+               console.log(senderresult.rows[0].balance)
+               console.log(amount)
+               console.log(`Sender ${sender} Does not have enough money`)
+            }
+            else{
+              console.log("updating receiver amount")
+              // Increase receiver amount
+              pool.query("UPDATE info SET balance = balance + $1 WHERE username = $2",
+              [amount, receiver],
+              (err, result) => {
+                console.log(`error is ${err}`)
+                console.log(`result is ${result}`)
+              })
+              console.log("logged in user is " + sender)
+              console.log("updating sender amount")
 
-            // Decrease sender amount
-            pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
-            [amount, sender],
-            (err, result) => {
-              console.log(`error is ${err}`)
-              console.log(`result is ${result}`)
-            })
-          }
-        })
+              // Decrease sender amount
+              pool.query("UPDATE info SET balance = balance - $1 WHERE username = $2",
+              [amount, sender],
+              (err, result) => {
+                console.log(`error is ${err}`)
+                console.log(`result is ${result}`)
+              })
+            }
+          })
+        }
       }
     })
   })
