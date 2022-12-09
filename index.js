@@ -327,7 +327,7 @@ app.post('/home', (req, res) => {
           if(err) {
               res.send({err: err})
           } else {
-              res.send(`Welcome ${req.session.user}. Your balance is ${result.rows[0].balance}`);
+              res.send(`Welcome ${req.session.user}. Your balance is $${result.rows[0].balance}`);
           }
       }
     );
