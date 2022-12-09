@@ -321,7 +321,7 @@ app.post('/home', (req, res) => {
   console.log("The home page:")
   console.log(req.session.user);
   if(req.session.user){
-    res.send(`Welcome ${req.session.user}`);
+    res.send(`Welcome ${req.session.user}. Your balance is`);
   }
   else{
     res.send("Welcome to our app. No user signed in.");
