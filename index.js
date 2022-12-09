@@ -170,7 +170,9 @@ app.post('/register', (req, res) => {
           console.log(senderresult.rows[0]);
           console.log(senderresult.rows[0].balance);
           if(senderresult.rows[0].balance < amount){
-          console.log(`Sender ${sender} Does not have enough money`)
+             console.log(senderresult.rows[0].balance)
+             console.log(amount)
+             console.log(`Sender ${sender} Does not have enough money`)
           }
           else{
             console.log("updating receiver amount")
