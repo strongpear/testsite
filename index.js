@@ -322,12 +322,12 @@ app.post('/home', (req, res) => {
   console.log("The home page:")
   console.log(req.session.user);
   if(req.session.user){
-    pool.query("SELECT * FROM kycform",
+    pool.query("SELECT * FROM info where username = ${req.session.user}",
     (err, result) => {
           if(err) {
               res.send({err: err})
           } else {
-              res.send(`Welcome ${req.session.user}. Your balance is`);
+              res.send(`Welcome ${req.session.user}. Your balance is ${result.rows[0].balance}`);
           }
       }
     );
