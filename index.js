@@ -153,7 +153,10 @@ app.post('/register', (req, res) => {
     const sender = req.session.user
     const receiver = req.body.receiver
     const amount = req.body.amount
-
+    console.log(`Sending a payment`)
+    console.log(`Sender is  ${sender}`)
+    console.log(`Reciver is ${receiver}`)
+    console.log(`Amount is ${receiver}`)
     pool.query("SELECT * FROM info WHERE username = $1", [receiver],
     (err, result) => {
       if (result.rows.length == 0) {
@@ -162,6 +165,7 @@ app.post('/register', (req, res) => {
       else{
         pool.query("SELECT * FROM info WHERE username = $1", [sender],
         (err, senderresult) => {
+          console.log(`Getting the sender from the Database`)
           console.log(senderresult);
           console.log(senderresult.rows[0]);
           console.log(senderresult.rows[0].balance);
