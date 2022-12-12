@@ -156,7 +156,8 @@ app.post('/register', (req, res) => {
   })
 
   app.post('/send', (req, res) => {
-    const sender = req.session.user
+    // const sender = req.session.user
+    const sender = sessionuser
     const receiver = req.body.receiver
     const amount = req.body.amount
     console.log(`Sending a payment`)
@@ -282,7 +283,7 @@ app.post('/login', (req, res) => {
           // If we have found someone with that username/pass combo
           console.log(`comparison is ${comparison}`)
           if (comparison) {
-              req.session.user = username;
+              // req.session.user = username;
               sessionuser = username;
               //console.log("The login page:")
               //console.log(req.session.user);
@@ -301,18 +302,19 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
   console.log("The logout page:")
-  console.log(req.session.user);
+  // console.log(req.session.user);
+  console.log(sessionuser);
   //delete req.session.user;
   //req.session.user = '';
   sessionuser = "invalid";
-  if(req.session){
+  // if(req.session){
 
-    req.session.destroy((error)=>{
-       if(error){
-         console.log(error);
-       }
-    });
-  }
+  //   req.session.destroy((error)=>{
+  //      if(error){
+  //        console.log(error);
+  //      }
+  //   });
+  // }
 })
 
 // Get kycform data
@@ -320,7 +322,8 @@ app.post('/admin', (req, res) => {
   //console.log("on admin side")
   //console.log(pool.query("SELECT * FROM kycform"))
   console.log("The admin page:")
-  console.log(req.session.user);
+  // console.log(req.session.user);
+  console.log(sessionuser);
   pool.query("SELECT * FROM kycform",
   (err, result) => {
       if (err) {
@@ -335,8 +338,10 @@ app.post('/admin', (req, res) => {
 
 app.post('/home', (req, res) => {
   console.log("The home page:")
-  console.log(req.session.user);
-  if(req.session.user){
+  // console.log(req.session.user);
+  console.log(sessionuser);
+  // if(req.session.user){
+  if(!(sessionuser === "invalid")){
     pool.query("SELECT * FROM info where username = $1", [sessionuser], 
     (err, result) => {
           if(err) {
@@ -376,7 +381,8 @@ app.post('/kycform', (req, res) => {
         console.log(`error is ${err}`)
         console.log(`result is ${result}`)
         console.log("The kycform page:")
-        console.log(req.session.user);
+        console.log(sessionuser);
+        // console.log(req.session.user);
       }
     );
 })
