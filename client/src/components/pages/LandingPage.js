@@ -11,7 +11,9 @@ Axios.defaults.withCredentials = true
 
 const mySession = {}
 mySession.user = ""
-export mySession;
+export {
+    mySession
+}
 
 export default function LandingPage() {
     const [user, setUser] = useState({});
