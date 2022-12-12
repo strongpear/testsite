@@ -18,6 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 
+const sessionuser = "invalid";
 
 app.use(express.json());
 //app.use(cors());
@@ -257,7 +258,7 @@ comparison = false;
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const plaintextPassword = req.body.password;
-  const sessionuser = req.body.sessionuser;
+  // const sessionuser = req.body.sessionuser;
   pool.query(
       
       "SELECT * FROM info WHERE username = $1",
