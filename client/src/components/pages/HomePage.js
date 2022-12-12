@@ -5,8 +5,6 @@ import { Fragment, useEffect, useState } from "react";
 
 Axios.defaults.withCredentials = true
 
-
-
 export default function HomePage() {
     const [username, setUsername] = useState("")
 
@@ -14,7 +12,7 @@ export default function HomePage() {
         const res = await Axios.post('/home');
         console.log(`This is the front end for the homepage`)
         console.log(res.data)
-        setUsername(res.data);
+        setUsername(res.data+"sfdgf");
     }
     useEffect(() => {
         getUsername();
