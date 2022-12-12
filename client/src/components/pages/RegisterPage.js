@@ -4,23 +4,6 @@ import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
 import '../../App.css'
-
-
-const Pool = (require("pg")).Pool
-const PORT = process.env.PORT || 3001;
-
-const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
-const proConfig = process.env.DATABASE_URL //heroku addons
-const pool = new Pool({
-    connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
-
-    // comment out when in localhost
-    ssl: {
-        rejectUnauthorized: false
-      }
-
-})
-
 Axios.defaults.withCredentials = true
 export default function SignUpPage() {
   const [usernameReg, setUsernameReg] = useState('');
@@ -44,19 +27,6 @@ export default function SignUpPage() {
         valid = false;
         console.log(`Password must contain 6 or more characters`)
     }
-    pool.query("SELECT * FROM info WHERE username = $1", [username],
-      (err, result) => {
-            if(err){
-                res.send({err:err})
-            }else{
-                if (result.rows.length >= 1) {
-                  console.log(`Duplicate Username on Register.js`)
-                } else {
-                  console.log(`Unique Username on Register.js`)
-                }
-            }
-
-      });
     console.log(`After the check valid is ${valid}`)
     if(valid){
         Axios.post('/register', {
