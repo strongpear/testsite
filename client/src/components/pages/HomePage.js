@@ -5,6 +5,8 @@ import { Fragment, useEffect, useState } from "react";
 
 Axios.defaults.withCredentials = true
 
+import mySession from './LandingPage'
+
 export default function HomePage() {
     const [username, setUsername] = useState("")
 
