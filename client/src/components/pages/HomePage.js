@@ -15,9 +15,7 @@ export default function HomePage() {
         if(!(res.data === "invalid user")){
             setUsername(res.data);
         } else {
-            Axios.post('/logout', {withCredentials: true}).then((response) => {
-                console.log("logged out")
-            })
+            window.location.replace("/");
         }
     }
     useEffect(() => {

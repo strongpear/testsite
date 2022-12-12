@@ -272,7 +272,7 @@ app.post('/login', (req, res) => {
         bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
-          console.log(`index.js sessionuser is ${sessionuser}`)
+          console.log(`sessionuser is ${sessionuser}`)
           if (err) {
               res.send({err: err}); //if error, next wont run
           }
