@@ -12,7 +12,9 @@ export default function HomePage() {
         const res = await Axios.post('/home');
         console.log(`This is the front end for the homepage`)
         console.log(res.data)
-        setUsername(res.data+"sfdgf");
+        if(res.data === "invalid user"){
+            setUsername(res.data+"sfdgf");
+        }
     }
     useEffect(() => {
         getUsername();

@@ -13,10 +13,8 @@ const session = require("express-session")
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-
 const app = express();
 const PORT = process.env.PORT || 3001;
-
 
 sessionuser = "invalid";
 
@@ -353,7 +351,7 @@ app.post('/home', (req, res) => {
     );
   }
   else{
-    res.send("Welcome to our app. No user signed in.");
+    res.send("invalid user");
   }
 })
 /*
