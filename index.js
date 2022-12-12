@@ -15,6 +15,8 @@ const saltRounds = 10;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+import mySession from './client/src/components/pages/LandingPage.js'
+
 app.use(express.json());
 //app.use(cors());
 app.use(
@@ -119,6 +121,7 @@ app.post('/register', (req, res) => {
   // }
   // console.log(`After the check valid is ${valid}`)
   // if(valid){
+    console.log('current user is: ${mySession.user}')
     pool.query("SELECT * FROM info WHERE username = $1", [username],
       (err, result) => {
         if (result.rows.length >= 1) {
