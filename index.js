@@ -180,7 +180,7 @@ app.post('/register', (req, res) => {
             console.log(senderresult);
             console.log(senderresult.rows[0]);
             console.log(senderresult.rows[0].balance);
-            if(senderresult.rows[0].balance < amount){
+            if(parseInt(senderresult.rows[0].balance) < amount){
                console.log(senderresult.rows[0].balance)
                console.log(amount)
                console.log(`Sender ${sender} Does not have enough money`)
