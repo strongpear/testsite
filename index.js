@@ -15,6 +15,8 @@ const saltRounds = 10;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+import mySession from './client/src/components/pages/LandingPage.js'
+
 app.use(express.json());
 //app.use(cors());
 app.use(
