@@ -283,6 +283,7 @@ app.post('/login', (req, res) => {
           console.log(`comparison is ${comparison}`)
           if (comparison) {
               req.session.user = username;
+              sessionuser = username;
               //console.log("The login page:")
               //console.log(req.session.user);
               //console.log(result)
@@ -335,12 +336,12 @@ app.post('/home', (req, res) => {
   console.log("The home page:")
   console.log(req.session.user);
   if(req.session.user){
-    pool.query("SELECT * FROM info where username = $1", [req.session.user], 
+    pool.query("SELECT * FROM info where username = $1", [sessionuser], 
     (err, result) => {
           if(err) {
               res.send({err: err})
           } else {
-              res.send(`Welcome ${req.session.user}. Your balance is $${result.rows[0].balance}`);
+              res.send(`Welcome ${sessionuser}. Your balance is $${result.rows[0].balance}`);
           }
       }
     );
