@@ -257,7 +257,7 @@ comparison = false;
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const plaintextPassword = req.body.password;
-
+  const sessionuser = req.body.sessionuser;
   pool.query(
       
       "SELECT * FROM info WHERE username = $1",
@@ -272,6 +272,7 @@ app.post('/login', (req, res) => {
         bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
+          console.log(`session user: ${sessionuser}`)
           if (err) {
               res.send({err: err}); //if error, next wont run
           }
@@ -289,7 +290,7 @@ app.post('/login', (req, res) => {
           }
           else {
               console.log("failed")
-              res.send({message: "Invalid Credentials."})
+              res.send({  : "Invalid Credentials."})
           }
 
     }
