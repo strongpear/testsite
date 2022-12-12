@@ -1,4 +1,6 @@
 // Initialize express server
+import mySession from './client/src/components/pages/LandingPage'
+
 const express = require("express");
 const Pool = (require("pg")).Pool
 const cors = require("cors");
@@ -15,7 +17,7 @@ const saltRounds = 10;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// import mySession from './client/src/components/pages/LandingPage'
+
 
 app.use(express.json());
 //app.use(cors());
