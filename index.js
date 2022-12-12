@@ -272,7 +272,7 @@ app.post('/login', (req, res) => {
         bcrypt.compare(plaintextPassword, result.rows[0].password, function(err, result) {
           console.log(`error is ${err}`)
           console.log(`result is ${result}`)
-          console.log(`session user: ${sessionuser}`)
+          console.log(`index.js sessionuser is ${sessionuser}`)
           if (err) {
               res.send({err: err}); //if error, next wont run
           }
@@ -290,7 +290,7 @@ app.post('/login', (req, res) => {
           }
           else {
               console.log("failed")
-              res.send({  : "Invalid Credentials."})
+              res.send({message: "Invalid Credentials."})
           }
 
     }
