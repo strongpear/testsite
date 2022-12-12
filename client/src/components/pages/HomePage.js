@@ -2,7 +2,6 @@ import Axios from "axios";
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Fragment, useEffect, useState } from "react";
-import mySession from './LandingPage'
 
 Axios.defaults.withCredentials = true
 

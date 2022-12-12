@@ -304,6 +304,7 @@ app.post('/logout', (req, res) => {
   console.log(req.session.user);
   //delete req.session.user;
   //req.session.user = '';
+  sessionuser = "invalid";
   if(req.session){
 
     req.session.destroy((error)=>{

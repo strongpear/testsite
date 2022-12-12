@@ -9,12 +9,6 @@ import BackgroundImage from '../../assets/images/bg.png'
 
 Axios.defaults.withCredentials = true
 
-const mySession = {}
-mySession.user = ""
-export {
-    mySession
-}
-
 export default function LandingPage() {
     const [user, setUser] = useState({});
 

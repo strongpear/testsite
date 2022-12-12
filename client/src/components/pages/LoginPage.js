@@ -3,7 +3,6 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import jwt_decode from 'jwt-decode';
-import mySession from './LandingPage'
 
 import '../../App.css'
 
@@ -44,7 +43,6 @@ export default function SignInPage() {
         Axios.post('/login', {
         username: username,
         password: password,
-        sessionuser: username,
         withCredentials: true
         }).then((response) => {
             console.log(response)
@@ -56,8 +54,6 @@ export default function SignInPage() {
             
         } else { // successful authentication
             document.getElementById("loginStatus").innerHTML = "";
-            mySession.user = username;
-            console.log('username login page: ', mySession.user);
             window.location.assign("/home");
     
         // on login success show a button that goes to home
