@@ -1,5 +1,5 @@
 // Initialize express server
-import mySession from './client/src/components/pages/LandingPage'
+// import mySession from './client/src/components/pages/LandingPage'
 
 const express = require("express");
 const Pool = (require("pg")).Pool
